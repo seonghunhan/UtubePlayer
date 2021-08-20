@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap, QImage   
+import sys
 
 
 
@@ -325,24 +326,28 @@ class Ui_YouTubePlayer(object):
         self.PlayPage_MinimumButton.setObjectName("pushButton")        
         self.stackedWidget.addWidget(self.PlayPage)
 
-        self.playvideo = QtWidgets.QLabel(self.PlayPage)
-        self.playvideo.setGeometry(QtCore.QRect(400, 450, 101, 18))
-        self.playvideo.setObjectName("playvideo")
-        #self.pixmap = QPixmap(self.Test.player)
-        #self.p = self.pixmap.scaled(400, 225, QtCore.Qt.IgnoreAspectRatio)
-        #self.playvideo.setPixmap(self.p)
-        #self.playvideo.update()
+        # self.mediaplayer = QtWidgets.QLabel(self.PlayPage)
+        # self.mediaplayer.setGeometry(QtCore.QRect(400, 450, 101, 18))
+        # self.mediaplayer.setObjectName("playvideo")
 
-        # self.ret, self.frame = cap.read()
-        #     if self.ret:
-        #         self.rgbImage = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
-        #         self.convertToQtFormat = QImage(self.rgbImage.data, self.rgbImage.shape[1], self.rgbImage.shape[0], QImage.Format_RGB888)
-                   
-        #         self.pixmap = QPixmap(self.convertToQtFormat)
-        #         self.p = self.pixmap.scaled(400, 225, QtCore.Qt.IgnoreAspectRatio)
+  
+        self.videoframe = QtWidgets.QFrame(self.PlayPage)
+        self.videoframe.setGeometry(QtCore.QRect(400,450,100,20))
+        self.videoframe.setObjectName("playvideo")
 
-        #         self.video_viewer_label.setPixmap(self.p)
-        #         self.video_viewer_label.update()
+        # if sys.platform.startswith("linux"):  # for Linux using the X Server
+        #     self.Test.mediaplayer.set_xwindow(self.videoframe.winId())
+        # elif sys.platform == "win32":  # for Windows
+        #     self.Test.mediaplayer.set_hwnd(self.videoframe.winId())
+        # elif sys.platform == "darwin":  # for MacOS
+        #     self.Test.mediaplayer.set_nsobject(self.videoframe.winId())
+
+        # 여기질문하기!!! Test1페이지를 로직통해서 임포트했는데 미디어플레이어변수를 인식을 못함
+
+
+
+
+        
 
 
 
@@ -429,7 +434,7 @@ class Ui_YouTubePlayer(object):
         self.PlayPage_ShupplePlayListBtn.setText(_translate("YouTubePlayer", ""))
         self.PlayPage_OnePlayBtn.setText(_translate("YouTubePlayer", ""))
         self.PlayPage_MinimumButton.setText(_translate("YouTubePlayer", "최소화 기능"))
-        self.playvideo.setText(_translate("YouTubePlayer", "비디오재생"))
+        # self.videoframe.setText(_translate("YouTubePlayer", "비디오재생"))
         self.SearchPage_SearchBtn.setText(_translate("YouTubePlayer", "검색"))
         self.SearchPage_background.setText(_translate("YouTubePlayer", ""))
         self.MovePlayListPageBtn.setText(_translate("YouTubePlayer", "PlayList"))
