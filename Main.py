@@ -25,6 +25,8 @@ if __name__ == "__main__":
     
     app = QtWidgets.QApplication(sys.argv)
     
+
+    
     start = Main()
 
     sys.exit(app.exec_())

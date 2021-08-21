@@ -1,6 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap, QImage   
 import sys
+import vlc
+import pafy
 
 
 
@@ -194,10 +196,17 @@ class Ui_YouTubePlayer(object):
 
         
 
+        self.PlayListPage_AddPlayVideoBtn = QtWidgets.QPushButton(self.PlayListPage)
+        self.PlayListPage_AddPlayVideoBtn.setGeometry(QtCore.QRect(1520, 1040, 161, 41))
+        self.PlayListPage_AddPlayVideoBtn.setObjectName("PlayListPage_AddPlayListBtn")
+        self.stackedWidget.addWidget(self.PlayListPage)
+
+
         self.PlayListPage_AddPlayListBtn = QtWidgets.QPushButton(self.PlayListPage)
-        self.PlayListPage_AddPlayListBtn.setGeometry(QtCore.QRect(1520, 1040, 161, 41))
+        self.PlayListPage_AddPlayListBtn.setGeometry(QtCore.QRect(1320, 1040, 161, 41))
         self.PlayListPage_AddPlayListBtn.setObjectName("PlayListPage_AddPlayListBtn")
         self.stackedWidget.addWidget(self.PlayListPage)
+
 
         self.PlayPage = QtWidgets.QWidget()
         self.PlayPage.setObjectName("PlayPage")
@@ -329,11 +338,11 @@ class Ui_YouTubePlayer(object):
         # self.mediaplayer = QtWidgets.QLabel(self.PlayPage)
         # self.mediaplayer.setGeometry(QtCore.QRect(400, 450, 101, 18))
         # self.mediaplayer.setObjectName("playvideo")
-
+        # ----------------------------------------------------------------------------------
   
-        self.videoframe = QtWidgets.QFrame(self.PlayPage)
-        self.videoframe.setGeometry(QtCore.QRect(400,450,100,20))
-        self.videoframe.setObjectName("playvideo")
+        # self.videoframe = QtWidgets.QFrame(self.PlayPage)
+        # self.videoframe.setGeometry(QtCore.QRect(400,450,100,20))
+        # self.videoframe.setObjectName("playvideo")
 
         # if sys.platform.startswith("linux"):  # for Linux using the X Server
         #     self.Test.mediaplayer.set_xwindow(self.videoframe.winId())
@@ -343,6 +352,22 @@ class Ui_YouTubePlayer(object):
         #     self.Test.mediaplayer.set_nsobject(self.videoframe.winId())
 
         # 여기질문하기!!! Test1페이지를 로직통해서 임포트했는데 미디어플레이어변수를 인식을 못함
+
+        
+        
+
+        self.videoframe = QtWidgets.QFrame(self.PlayPage)
+        self.videoframe.setGeometry(QtCore.QRect(40,220,1000,750))
+
+        if sys.platform.startswith("linux"):  # for Linux using the X Server
+            self.Test.mediaplayer.set_xwindow(self.videoframe.winId())
+        elif sys.platform == "win32":  # for Windows
+            self.Test.mediaplayer.set_hwnd(self.videoframe.winId())
+        elif sys.platform == "darwin":  # for MacOS
+            self.mediaplayer.set_nsobject(self.videoframe.winId())
+
+
+
 
 
 
@@ -424,6 +449,7 @@ class Ui_YouTubePlayer(object):
         self.ListName9.setText(_translate("YouTubePlayer", "ListName9"))
         self.ListName10.setText(_translate("YouTubePlayer", "ListName10"))
         self.PlayListPage_YoutubeLogoBtn.setText(_translate("YouTubePlayer", ""))
+        self.PlayListPage_AddPlayVideoBtn.setText(_translate("YouTubePlayer", "재생영상 추가"))
         self.PlayListPage_AddPlayListBtn.setText(_translate("YouTubePlayer", "재생목록 추가"))
         self.PlayPage_TitleLabel.setText(_translate("YouTubePlayer", "PlayPageTitleLabel"))
         self.PlayPage_PlayListNameLabel.setText(_translate("YouTubePlayer", "PlayPagePlayListNameLabel"))

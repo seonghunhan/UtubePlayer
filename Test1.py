@@ -7,16 +7,41 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Test() :
 
     def __init__(self) :
-        pass
+
+        # self.url = "https://youtu.be/qwqweqe"
+
+        # self.instance = vlc.Instance()
+        # self.mediaplayer = self.instance.media_player_new()
+        # video = pafy.new(self.url)
+        # best = video.getbest()
+        # playurl = best.url
+                
+        # media = self.instance.media_new(playurl)
+        # self.mediaplayer.set_media(media)
+        # self.mediaplayer.play()
+
+        self.instance = vlc.Instance()
+        self.mediaplayer = self.instance.media_player_new()
+        
 
     def videoplay(self, url) :
 
-        # url = "https://youtu.be/Xln4crS82aM"
+
+
         video = pafy.new(url)
         best = video.getbest()
         playurl = best.url
-        self.instance = vlc.Instance()
-        self.mediaplayer = self.instance.media_player_new()
+                
+        media = self.instance.media_new(playurl)
+        self.mediaplayer.set_media(media)
+        self.mediaplayer.play()
+        
+
+        # url = "https://youtu.be/Xln4crS82aM"
+        # video = pafy.new(url)
+        # best = video.getbest()
+        # playurl = best.url
+
 
         # if sys.platform.startswith("linux"):  # for Linux using the X Server
         #     self.mediaplayer.set_xwindow(self.videoframe.winId())
@@ -29,9 +54,9 @@ class Test() :
         
 
         # filename = "/path/of/your/video.mp4"
-        media = self.instance.media_new(playurl)
-        self.mediaplayer.set_media(media)
-        self.mediaplayer.play()
+        # media = self.instance.media_new(playurl)
+        # self.mediaplayer.set_media(media)
+        # self.mediaplayer.play()
 
 
         # # url = "https://youtu.be/Xln4crS82aM"

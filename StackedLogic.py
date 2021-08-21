@@ -3,17 +3,23 @@ from PyQt5.QtGui import QPixmap
 
 import StackedUi
 import MinimumModeUi
-import addplaylistUi
+import addplayvideoUi
 import Test1
+import AddplaylistUi
+import DB
+
 
 class StackedLogic(object) :
     
     def __init__(self) :
         
         self.MinimumModeUi = MinimumModeUi.Ui_MinimumMode()
-        self.AddPlaylistUi = addplaylistUi.Ui_addplaylist()
+        self.AddPlayVideoUi = addplayvideoUi.Ui_addplayVideo()
+        self.AddPlayListUi = AddplaylistUi.Ui_Addplaylist()
         self.Test = Test1.Test()
         self.StackedUi = StackedUi.Ui_YouTubePlayer(self.Test)
+        self.DB = DB.DataBase()
+        
 
 
         self.StackedUi.PlayPage_MinimumButton.clicked.connect(self.MinimumModeUi_showEvent)
@@ -22,12 +28,14 @@ class StackedLogic(object) :
         self.MinimumModeUi.MaxiumBtn.clicked.connect(self.StackedUi_showEvent)
         self.MinimumModeUi.MaxiumBtn.clicked.connect(self.MinimumModeUi_closeEvent)
 
+        self.StackedUi.PlayListPage_AddPlayVideoBtn.clicked.connect(self.addplayVideoUi_showEvent)
         self.StackedUi.PlayListPage_AddPlayListBtn.clicked.connect(self.addplaylistUi_showEvent)
 
 
 
-
         self.StackedUi.urlgogobtn.clicked.connect(self.urlEvent)
+
+        self.AddPlayListUi.CompleteAdd.clicked.connect(self.AddListEvent)
         
 
         self.StackedUi.MovePlayListPageBtn.clicked.connect(self.StackedUi.showPlayListPage)
@@ -199,10 +207,18 @@ class StackedLogic(object) :
     def StackedUi_closeEvent(self) :
         self.StackedUi.StackedUi.close()
 
+    def addplayVideoUi_showEvent(self) :
+        self.AddPlayVideoUi.addplaylist.show()
+
     def addplaylistUi_showEvent(self) :
-        self.AddPlaylistUi.addplaylist.show()
+        self.AddPlayListUi.addplaylist.show()
 
     def urlEvent(self) :
         url = self.StackedUi.playurl.text()
         
         self.Test.videoplay(url)
+
+    def AddListEvent(self) :
+        listname = self.AddPlayListUi.InputPlayList.text()
+
+        self.DB.InputList(listname)
