@@ -34,4 +34,4 @@
 
 ![이미지를 불러올 수 없습니다.](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.notepet.co.kr%2Fnews%2Farticle%2Farticle_view%2F%3Fidx%3D17405&psig=AOvVaw0qpbc785sqN7NaDCZd87Us&ust=1629801204605000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMCIpeH4xvICFQAAAAAdAAAAABAD)   #[]는 이미지 못부를때 띄울 메시지
 
-![이미지를 불러올 수 없습니다.](C:\Users\seonghun.han\Desktop\스테이지 어스\8주차(프로젝트)\내과제/shupple.png)
+![이미지를 불러올 수 없습니다.](./shupple.png)
