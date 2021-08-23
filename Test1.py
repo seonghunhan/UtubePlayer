@@ -26,8 +26,6 @@ class Test() :
 
     def videoplay(self, url) :
 
-
-
         video = pafy.new(url)
         best = video.getbest()
         playurl = best.url

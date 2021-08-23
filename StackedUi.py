@@ -207,6 +207,11 @@ class Ui_YouTubePlayer(object):
         self.PlayListPage_AddPlayListBtn.setObjectName("PlayListPage_AddPlayListBtn")
         self.stackedWidget.addWidget(self.PlayListPage)
 
+        self.PlayListPage_DeletePlayListBtn = QtWidgets.QPushButton(self.PlayListPage)
+        self.PlayListPage_DeletePlayListBtn.setGeometry(QtCore.QRect(1120, 1040, 161, 41))
+        self.PlayListPage_DeletePlayListBtn.setObjectName("PlayListPage_AddPlayListBtn")
+        self.stackedWidget.addWidget(self.PlayListPage)
+
 
         self.PlayPage = QtWidgets.QWidget()
         self.PlayPage.setObjectName("PlayPage")
@@ -360,7 +365,7 @@ class Ui_YouTubePlayer(object):
         self.videoframe.setGeometry(QtCore.QRect(40,220,1000,750))
 
         if sys.platform.startswith("linux"):  # for Linux using the X Server
-            self.Test.mediaplayer.set_xwindow(self.videoframe.winId())
+            self.Test.medaiplayer.set_xwindow(self.videoframe.winId())
         elif sys.platform == "win32":  # for Windows
             self.Test.mediaplayer.set_hwnd(self.videoframe.winId())
         elif sys.platform == "darwin":  # for MacOS
@@ -451,6 +456,7 @@ class Ui_YouTubePlayer(object):
         self.PlayListPage_YoutubeLogoBtn.setText(_translate("YouTubePlayer", ""))
         self.PlayListPage_AddPlayVideoBtn.setText(_translate("YouTubePlayer", "재생영상 추가"))
         self.PlayListPage_AddPlayListBtn.setText(_translate("YouTubePlayer", "재생목록 추가"))
+        self.PlayListPage_DeletePlayListBtn.setText(_translate("YouTubePlayer", "재생목록 제거"))
         self.PlayPage_TitleLabel.setText(_translate("YouTubePlayer", "PlayPageTitleLabel"))
         self.PlayPage_PlayListNameLabel.setText(_translate("YouTubePlayer", "PlayPagePlayListNameLabel"))
         self.PlayPage_PlayBeforeVideoBtn.setText(_translate("YouTubePlayer", ""))
