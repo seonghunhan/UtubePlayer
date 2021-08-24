@@ -1,84 +1,77 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPixmap, QImage     
-import pafy
-import cv2
-from time import sleep
-import threading
-
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-
-        self.video_viewer_label = QtWidgets.QLabel(self.centralwidget)
-        self.video_viewer_label.setGeometry(QtCore.QRect(10, 10, 400, 300))
-
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-    def Video_to_frame(self, MainWindow):
-        url = "https://youtu.be/Xln4crS82aM"
-        vPafy = pafy.new(url)
-
-        video_length=vPafy.length/60
-        print(video_length/60)
-    
-        play = vPafy.getbest(preftype="mp4")
-            
-        cap = cv2.VideoCapture(play.url)
-
-        while True:
-            self.ret, self.frame = cap.read()
-            if self.ret:
-                self.rgbImage = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
-                self.convertToQtFormat = QImage(self.rgbImage.data, self.rgbImage.shape[1], self.rgbImage.shape[0], QImage.Format_RGB888)
-                   
-                self.pixmap = QPixmap(self.convertToQtFormat)
-                self.p = self.pixmap.scaled(400, 225, QtCore.Qt.IgnoreAspectRatio)
-
-                self.video_viewer_label.setPixmap(self.p)
-                self.video_viewer_label.update()
-
-                sleep(0.03) #Youtube 영상 1프레임당 0.03초
-
-            else :
-                break
-
-        cap.release()
-        cv2.destroyAllWindows()
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-
-    #video_to_frame을 쓰레드로 사용
-    def video_thread(self,MainWindow):
-        thread=threading.Thread(target=self.Video_to_frame,args=(self,))
-        thread.daemon=True #프로그램 종료시 프로세스도 함께 종료 (백그라운드 재생 X)
-        thread.start()
-
-if __name__=="__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-
-    ui.video_thread(MainWindow)
-
-    MainWindow.show()
-
-    sys.exit(app.exec_())
-
+# importing libraries
+from PyQt5.QtWidgets import * 
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import * 
+from PyQt5.QtCore import * 
+import sys
+  
+  
+class Window(QMainWindow):
+  
+    def __init__(self):
+        super().__init__()
+  
+        # setting title
+        self.setWindowTitle("Python ")
+  
+        # setting geometry
+        self.setGeometry(100, 100, 500, 400)
+  
+        # calling method
+        self.UiComponents()
+  
+        # showing all the widgets
+        self.show()
+  
+  
+  
+    # method for components
+    def UiComponents(self):
+  
+        # creating a QListWidget
+        list_widget = QListWidget(self)
+  
+        # setting geometry to it
+        list_widget.setGeometry(50, 70, 150, 100)
+  
+        # list widget items
+        item1 = QListWidgetItem("A")
+        item2 = QListWidgetItem("B")
+        item3 = QListWidgetItem("C")
+        item4 = QListWidgetItem("D")
+  
+        # adding items to the list widget
+        list_widget.addItem(item1)
+        list_widget.addItem(item2)
+        list_widget.addItem(item3)
+        list_widget.addItem(item4)
+  
+        # scroll bar
+        scroll_bar = QScrollBar(self)
+  
+        # setting style sheet to the scroll bar
+        scroll_bar.setStyleSheet("background : lightgreen;")
+  
+        # setting vertical scroll bar to it
+        list_widget.setVerticalScrollBar(scroll_bar)
+  
+        # creating a label
+        label = QLabel("GeesforGeeks", self)
+  
+        # setting geometry to the label
+        label.setGeometry(230, 80, 280, 80)
+  
+        # making label multi line
+        label.setWordWrap(True)
+  
+  
+  
+  
+# create pyqt5 app
+App = QApplication(sys.argv)
+  
+# create the instance of our Window
+window = Window()
+  
+# start the app
+sys.exit(App.exec())

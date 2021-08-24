@@ -1,5 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap, QImage   
+from PyQt5.QtGui import * 
+from PyQt5.QtCore import * 
+from PyQt5.QtWidgets import * 
+from PyQt5 import QtCore, QtGui
 import sys
 import vlc
 import pafy
@@ -236,20 +240,30 @@ class Ui_YouTubePlayer(object):
                                                 "")
         self.PlayListPage_background2.setObjectName("lineEdit")
 
-        self.PlayPage_TitleScrollArea = QtWidgets.QScrollArea(self.PlayPage)
-        self.PlayPage_TitleScrollArea.setGeometry(QtCore.QRect(10, 80, 1060, 91))
-        self.PlayPage_TitleScrollArea.setWidgetResizable(True)
-        self.PlayPage_TitleScrollArea.setObjectName("PlayPage_TitleScrollArea")
 
-        self.PlayPage_ScrollAreaWidgetContents = QtWidgets.QWidget()
-        self.PlayPage_ScrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1059, 89))
-        self.PlayPage_ScrollAreaWidgetContents.setObjectName("PlayPageScrollAreaWidgetContents")
 
-        self.PlayPage_TitleLabel = QtWidgets.QLabel(self.PlayPage_ScrollAreaWidgetContents)
-        self.PlayPage_TitleLabel.setGeometry(QtCore.QRect(10, 10, 1031, 71))
+        # self.PlayPage_TitleScrollArea = QtWidgets.QScrollArea(self.PlayPage)
+        # self.PlayPage_TitleScrollArea.setGeometry(QtCore.QRect(10, 80, 500, 91))
+        # self.PlayPage_TitleScrollArea.setWidgetResizable(True)
+        # self.PlayPage_TitleScrollArea.setObjectName("PlayPage_TitleScrollArea")
+        # self.PlayPage_TitleScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        
+
+        # self.PlayPage_ScrollAreaWidgetContents = QtWidgets.QWidget()
+        # self.PlayPage_ScrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 477, 89))
+        # self.PlayPage_ScrollAreaWidgetContents.setObjectName("PlayPageScrollAreaWidgetContents")
+
+        self.scrollbar1 = QScrollBar(self.PlayListPage)
+
+        self.PlayPage_TitleLabel = QtWidgets.QLabel(self.PlayListPage)
+        self.PlayPage_TitleLabel.setGeometry(QtCore.QRect(10, 10, 1200, 71))
         self.PlayPage_TitleLabel.setObjectName("PlayPage_TitleLabel")
 
-        self.PlayPage_TitleScrollArea.setWidget(self.PlayPage_ScrollAreaWidgetContents)
+        self.scrollbar1.setWidget(self.PlayPage_TitleLabel)
+
+
+
+
         self.PlayPage_PlayListNameLabel = QtWidgets.QLabel(self.PlayPage)
         self.PlayPage_PlayListNameLabel.setGeometry(QtCore.QRect(1250, 80, 460, 31))
         self.PlayPage_PlayListNameLabel.setObjectName("PlayPage_PlayListNameLabel")
@@ -382,7 +396,7 @@ class Ui_YouTubePlayer(object):
 
 
         self.playurl = QtWidgets.QLineEdit(self.PlayPage)
-        self.playurl.setGeometry(QtCore.QRect(30, 80, 1371, 31))
+        self.playurl.setGeometry(QtCore.QRect(30, 20, 1371, 31))
         self.playurl.setObjectName("playurl_Bar")
 
 
@@ -457,7 +471,7 @@ class Ui_YouTubePlayer(object):
         self.PlayListPage_AddPlayVideoBtn.setText(_translate("YouTubePlayer", "재생영상 추가"))
         self.PlayListPage_AddPlayListBtn.setText(_translate("YouTubePlayer", "재생목록 추가"))
         self.PlayListPage_DeletePlayListBtn.setText(_translate("YouTubePlayer", "재생목록 제거"))
-        self.PlayPage_TitleLabel.setText(_translate("YouTubePlayer", "PlayPageTitleLabel"))
+        self.PlayPage_TitleLabel.setText(_translate("YouTubePlayer", "PlayPageTitleLabelㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"))
         self.PlayPage_PlayListNameLabel.setText(_translate("YouTubePlayer", "PlayPagePlayListNameLabel"))
         self.PlayPage_PlayBeforeVideoBtn.setText(_translate("YouTubePlayer", ""))
         self.PlayPage_PlayVideoBtn.setText(_translate("YouTubePlayer", ""))
