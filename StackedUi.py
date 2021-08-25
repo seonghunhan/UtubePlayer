@@ -16,13 +16,25 @@ class Ui_YouTubePlayer(object):
     def __init__(self,Test) :
         self.StackedUi = QtWidgets.QMainWindow()
         self.Test = Test
+        self.playlist_x = 1500
+        self.playlist_y = 800
         self.setupUi()
+
+
 
         self.stackedWidget.setCurrentWidget(self.PlayListPage)
         
  
 
         self.StackedUi.show()
+
+        self.playlistpage1Ui()
+
+        self.playlistpage1ui = Ui_YouTubePlayer.playlistpage1Ui(self)
+
+        self.widgetList = []
+
+        
 
 
     def showPlayListPage(self) : 
@@ -34,6 +46,24 @@ class Ui_YouTubePlayer(object):
     def showSearchPage(self) : 
         self.stackedWidget.setCurrentWidget(self.SearchPage)
         
+
+    def playlistpage1Ui(self) :
+        self.List1 = QtWidgets.QLabel(self.PlayListPage)
+        self.List1.setGeometry(QtCore.QRect(150,200, 200, 200))
+        self.List1.setObjectName("List1")
+        self.pixmap = QPixmap('File1.PNG')
+        self.List1.setPixmap(self.pixmap) # 이미지 세팅
+        self.List1.resize(self.pixmap.width(), self.pixmap.height())
+
+
+
+        self.ListName1 = QtWidgets.QLabel("고고고고", self.PlayListPage)
+        self.ListName1.setGeometry(QtCore.QRect(200,350, 101, 18))
+        self.ListName1.setObjectName("ListName1")
+
+        # self.List1.show()
+        # self.ListName1.show()
+
 
     def setupUi(self):
         self.StackedUi.setObjectName("YouTubePlayer")
@@ -62,128 +92,24 @@ class Ui_YouTubePlayer(object):
         self.PlayListPage = QtWidgets.QWidget()
         self.PlayListPage.setObjectName("PlayListPage")
 
-        self.PlayListPage_background = QtWidgets.QLineEdit(self.PlayListPage)
-        self.PlayListPage_background.setGeometry(QtCore.QRect(60, 110, 1500, 800))
+        self.PlayListPage_background = QtWidgets.QWidget(self.PlayListPage)
+        self.PlayListPage_background.setGeometry(QtCore.QRect(60, 110, self.playlist_x, self.playlist_y))
         self.PlayListPage_background.setStyleSheet("background-color:rgb(188, 188, 188);\n"
                                                 "border-radius: 10px ;\n"
                                                 "border-style: solid;\n"
                                                 "border-width: 1px;\n"
                                                 "border-color: rgb(7, 7, 7)\n"
                                                 "")
-        self.PlayListPage_background.setObjectName("lineEdit")
+        self.scrollArea = QtWidgets.QScrollArea(self.PlayListPage_background)
+        self.scrollArea.setGeometry(0, 0, self.playlist_x, self.playlist_y)
 
-
-        self.List1 = QtWidgets.QLabel(self.PlayListPage)
-        self.List1.setGeometry(QtCore.QRect(150,200, 200, 200))
-        self.List1.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List1.setPixmap(self.pixmap) # 이미지 세팅
-        self.List1.resize(self.pixmap.width(), self.pixmap.height())
+        self.verticalFrame = QtWidgets.QWidget(self.scrollArea)
+        self.verticalFrame.setGeometry(0, 0, self.playlist_x -30, 10)
+        self.scrollArea.setWidget(self.verticalFrame)
+        self.verticalFrame.setStyleSheet("border : 1px solid red")
 
 
 
-        self.List2 = QtWidgets.QLabel(self.PlayListPage)
-        self.List2.setGeometry(QtCore.QRect(420,200, 200, 200))
-        self.List2.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List2.setPixmap(self.pixmap) # 이미지 세팅
-        self.List2.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List3 = QtWidgets.QLabel(self.PlayListPage)
-        self.List3.setGeometry(QtCore.QRect(690,200, 200, 200))
-        self.List3.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List3.setPixmap(self.pixmap) # 이미지 세팅
-        self.List3.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List4 = QtWidgets.QLabel(self.PlayListPage)
-        self.List4.setGeometry(QtCore.QRect(960,200, 200, 200))
-        self.List4.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List4.setPixmap(self.pixmap) # 이미지 세팅
-        self.List4.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List5 = QtWidgets.QLabel(self.PlayListPage)
-        self.List5.setGeometry(QtCore.QRect(1230,200, 200, 200))
-        self.List5.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List5.setPixmap(self.pixmap) # 이미지 세팅
-        self.List5.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List6 = QtWidgets.QLabel(self.PlayListPage)
-        self.List6.setGeometry(QtCore.QRect(150,500, 200, 200))
-        self.List6.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List6.setPixmap(self.pixmap) # 이미지 세팅
-        self.List6.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List7 = QtWidgets.QLabel(self.PlayListPage)
-        self.List7.setGeometry(QtCore.QRect(420,500, 200, 200))
-        self.List7.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List7.setPixmap(self.pixmap) # 이미지 세팅
-        self.List7.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List8 = QtWidgets.QLabel(self.PlayListPage)
-        self.List8.setGeometry(QtCore.QRect(690,500, 200, 200))
-        self.List8.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List8.setPixmap(self.pixmap) # 이미지 세팅
-        self.List8.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List9 = QtWidgets.QLabel(self.PlayListPage)
-        self.List9.setGeometry(QtCore.QRect(960,500, 200, 200))
-        self.List9.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List9.setPixmap(self.pixmap) # 이미지 세팅
-        self.List9.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.List10 = QtWidgets.QLabel(self.PlayListPage)
-        self.List10.setGeometry(QtCore.QRect(1230,500, 200, 200))
-        self.List10.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List10.setPixmap(self.pixmap) # 이미지 세팅
-        self.List10.resize(self.pixmap.width(), self.pixmap.height())
-
-        self.ListName1 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName1.setGeometry(QtCore.QRect(200,350, 101, 18))
-        self.ListName1.setObjectName("ListName1")
-
-        self.ListName2 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName2.setGeometry(QtCore.QRect(470, 350, 101, 18))
-        self.ListName2.setObjectName("ListName2")
-
-        self.ListName3 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName3.setGeometry(QtCore.QRect(740, 350, 101, 18))
-        self.ListName3.setObjectName("ListName3")
-
-        self.ListName4 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName4.setGeometry(QtCore.QRect(1010, 350, 101, 18))
-        self.ListName4.setObjectName("ListName4")
-
-        self.ListName5 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName5.setGeometry(QtCore.QRect(1280, 350, 101, 18))
-        self.ListName5.setObjectName("ListName5")
-
-        self.ListName6 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName6.setGeometry(QtCore.QRect(200, 650, 101, 18))
-        self.ListName6.setObjectName("ListName6")
-
-        self.ListName7 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName7.setGeometry(QtCore.QRect(470, 650, 101, 18))
-        self.ListName7.setObjectName("ListName7")
-
-        self.ListName8 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName8.setGeometry(QtCore.QRect(740, 650, 101, 18))
-        self.ListName8.setObjectName("ListName8")
-
-        self.ListName9 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName9.setGeometry(QtCore.QRect(1010, 650, 101, 18))
-        self.ListName9.setObjectName("ListName9")
-
-        self.ListName10 = QtWidgets.QLabel(self.PlayListPage)
-        self.ListName10.setGeometry(QtCore.QRect(1280, 650, 101, 18))
-        self.ListName10.setObjectName("ListName10")
 
         # self.PlayListPage_YoutubeLogoBtn = QtWidgets.QPushButton(self.PlayListPage)
         # self.PlayListPage_YoutubeLogoBtn.setGeometry(QtCore.QRect(70, 1030, 112, 34))
@@ -250,17 +176,29 @@ class Ui_YouTubePlayer(object):
         
 
         # self.PlayPage_ScrollAreaWidgetContents = QtWidgets.QWidget()
-        # self.PlayPage_ScrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 477, 89))
+        # self.PlayPage_ScrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 510, 100))
         # self.PlayPage_ScrollAreaWidgetContents.setObjectName("PlayPageScrollAreaWidgetContents")
 
-        self.scrollbar1 = QScrollBar(self.PlayListPage)
 
-        self.PlayPage_TitleLabel = QtWidgets.QLabel(self.PlayListPage)
-        self.PlayPage_TitleLabel.setGeometry(QtCore.QRect(10, 10, 1200, 71))
-        self.PlayPage_TitleLabel.setObjectName("PlayPage_TitleLabel")
 
-        self.scrollbar1.setWidget(self.PlayPage_TitleLabel)
+        # self.PlayPage_TitleLabel = QtWidgets.QLabel(self.PlayPage_TitleScrollArea)
+        # self.PlayPage_TitleLabel.setGeometry(QtCore.QRect(10, 10, 1200, 71))
+        # self.PlayPage_TitleLabel.setObjectName("PlayPage_TitleLabel")
 
+        # 해일씨 코드
+        # self.scroll = QtWidgets.QScrollArea(self.PlayPage)
+        # self.scroll.setGeometry(30 , 110, 500, 90)
+
+        # self.PlayPage_TitleLable = QtWidgets.QLabel("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ", self.scroll)
+        # self.PlayPage_TitleLable.setGeometry(0, 0, 800, 90) 
+        # self.scroll.setWidget(self.PlayPage_TitleLable)   
+
+
+        self.scroll = QtWidgets.QScrollArea(self.PlayPage)
+        self.scroll.setGeometry(10 , 100, 1050, 90)
+        self.PlayPage_TitleLabel = QtWidgets.QLabel("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇdd",self.scroll)
+        self.PlayPage_TitleLabel.setGeometry(10, 100, 2000, 70)
+        self.scroll.setWidget(self.PlayPage_TitleLabel)
 
 
 
@@ -446,32 +384,32 @@ class Ui_YouTubePlayer(object):
         self.StackedUi.setWindowTitle(_translate("YouTubePlayer", "MainWindow"))
         self.MoveSearchPageBtn.setText(_translate("YouTubePlayer", "검색"))
         self.MovePlayPageBtn.setText(_translate("YouTubePlayer", "재생중인 영상"))
-        self.PlayListPage_background.setText(_translate("YouTubePlayer", ""))
-        self.List1.setText(_translate("YouTubePlayer", ""))
-        self.List2.setText(_translate("YouTubePlayer", ""))
-        self.List3.setText(_translate("YouTubePlayer", ""))
-        self.List4.setText(_translate("YouTubePlayer", ""))
-        self.List5.setText(_translate("YouTubePlayer", ""))
-        self.List6.setText(_translate("YouTubePlayer", ""))
-        self.List7.setText(_translate("YouTubePlayer", ""))
-        self.List8.setText(_translate("YouTubePlayer", ""))
-        self.List9.setText(_translate("YouTubePlayer", ""))
-        self.List10.setText(_translate("YouTubePlayer", ""))
-        self.ListName1.setText(_translate("YouTubePlayer", "ListName1"))
-        self.ListName2.setText(_translate("YouTubePlayer", "ListName2"))
-        self.ListName3.setText(_translate("YouTubePlayer", "ListName3"))
-        self.ListName4.setText(_translate("YouTubePlayer", "ListName4"))
-        self.ListName5.setText(_translate("YouTubePlayer", "ListName5"))
-        self.ListName6.setText(_translate("YouTubePlayer", "ListName6"))
-        self.ListName7.setText(_translate("YouTubePlayer", "ListName7"))
-        self.ListName8.setText(_translate("YouTubePlayer", "ListName8"))
-        self.ListName9.setText(_translate("YouTubePlayer", "ListName9"))
-        self.ListName10.setText(_translate("YouTubePlayer", "ListName10"))
+        # self.PlayListPage_background.setText(_translate("YouTubePlayer", ""))
+        # self.List1.setText(_translate("YouTubePlayer", ""))
+        # self.List2.setText(_translate("YouTubePlayer", ""))
+        # self.List3.setText(_translate("YouTubePlayer", ""))
+        # self.List4.setText(_translate("YouTubePlayer", ""))
+        # self.List5.setText(_translate("YouTubePlayer", ""))
+        # self.List6.setText(_translate("YouTubePlayer", ""))
+        # self.List7.setText(_translate("YouTubePlayer", ""))
+        # self.List8.setText(_translate("YouTubePlayer", ""))
+        # self.List9.setText(_translate("YouTubePlayer", ""))
+        # self.List10.setText(_translate("YouTubePlayer", ""))
+        # self.ListName1.setText(_translate("YouTubePlayer", "ListName1"))
+        # self.ListName2.setText(_translate("YouTubePlayer", "ListName2"))
+        # self.ListName3.setText(_translate("YouTubePlayer", "ListName3"))
+        # self.ListName4.setText(_translate("YouTubePlayer", "ListName4"))
+        # self.ListName5.setText(_translate("YouTubePlayer", "ListName5"))
+        # self.ListName6.setText(_translate("YouTubePlayer", "ListName6"))
+        # self.ListName7.setText(_translate("YouTubePlayer", "ListName7"))
+        # self.ListName8.setText(_translate("YouTubePlayer", "ListName8"))
+        # self.ListName9.setText(_translate("YouTubePlayer", "ListName9"))
+        # self.ListName10.setText(_translate("YouTubePlayer", "ListName10"))
         self.PlayListPage_YoutubeLogoBtn.setText(_translate("YouTubePlayer", ""))
         self.PlayListPage_AddPlayVideoBtn.setText(_translate("YouTubePlayer", "재생영상 추가"))
         self.PlayListPage_AddPlayListBtn.setText(_translate("YouTubePlayer", "재생목록 추가"))
         self.PlayListPage_DeletePlayListBtn.setText(_translate("YouTubePlayer", "재생목록 제거"))
-        self.PlayPage_TitleLabel.setText(_translate("YouTubePlayer", "PlayPageTitleLabelㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"))
+        #self.PlayPage_TitleLabel.setText(_translate("YouTubePlayer", "PlayPageTitleLabelㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"))
         self.PlayPage_PlayListNameLabel.setText(_translate("YouTubePlayer", "PlayPagePlayListNameLabel"))
         self.PlayPage_PlayBeforeVideoBtn.setText(_translate("YouTubePlayer", ""))
         self.PlayPage_PlayVideoBtn.setText(_translate("YouTubePlayer", ""))
@@ -486,6 +424,8 @@ class Ui_YouTubePlayer(object):
         self.MovePlayListPageBtn.setText(_translate("YouTubePlayer", "PlayList"))
 
 
+
+    
 
 
 # if __name__ == "__main__":

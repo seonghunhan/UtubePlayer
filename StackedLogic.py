@@ -5,8 +5,8 @@ import StackedUi
 import MinimumModeUi
 import addplayvideoUi
 import Test1
-import AddplaylistUi
 import DB
+import Addplaylistlogic
 import DeleteplaylistLogic
 
 
@@ -16,11 +16,11 @@ class StackedLogic(object) :
         
         self.MinimumModeUi = MinimumModeUi.Ui_MinimumMode()
         self.AddPlayVideoUi = addplayvideoUi.Ui_addplayVideo()
-        self.AddPlayListUi = AddplaylistUi.Ui_Addplaylist()
         self.Test = Test1.Test()
         self.StackedUi = StackedUi.Ui_YouTubePlayer(self.Test) # 여기서는 이렇게 해야함 -> 여기파일에서 작동시키니깐
                                                                 # DB는 서로 껐다켰다 수정하니깐 각자 import해도 상관무
         
+        self.Addplaylist = Addplaylistlogic.Addplaylistlogic(self.StackedUi)
         self.Deleteplaylist = DeleteplaylistLogic.DeleteplaylistLogic()
 
         
@@ -41,7 +41,7 @@ class StackedLogic(object) :
 
         self.StackedUi.urlgogobtn.clicked.connect(self.urlEvent)
 
-        self.AddPlayListUi.CompleteAdd.clicked.connect(self.AddListEvent)
+
 
 
         
@@ -257,7 +257,7 @@ class StackedLogic(object) :
         self.AddPlayVideoUi.addplaylist.show()
 
     def addplaylistUi_showEvent(self) :
-        self.AddPlayListUi.addplaylist.show()
+        self.Addplaylist.AddplaylistUi.addplaylist.show()
 
     def deleteplatlistUi_showEvent(self) :
         self.Deleteplaylist.deleteplaylistUi.Deleteplaylist.show()
@@ -269,9 +269,3 @@ class StackedLogic(object) :
         
         self.Test.videoplay(url)
 
-    def AddListEvent(self) :
-        listname = self.AddPlayListUi.InputPlayList.text()
-
-        db = DB.DataBase()
-
-        db.InputList(listname)
