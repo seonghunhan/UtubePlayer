@@ -13,9 +13,9 @@ import pafy
 
 
 class Ui_YouTubePlayer(object):
-    def __init__(self,Test) :
+    def __init__(self,asd) :
         self.StackedUi = QtWidgets.QMainWindow()
-        self.Test = Test
+        self.Test = asd
         self.playlist_x = 1500
         self.playlist_y = 800
         self.setupUi()

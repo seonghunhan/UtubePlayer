@@ -25,9 +25,25 @@ class Addplaylistlogic(object) :
         db = DB.DataBase()
         
         db.InputList()
+
+    def addlist(self) :
+        
+        listWidget = QtWidgets.QWidget()
+        listWidget.setStyleSheet("background-color:blue;")
         
 
+        IconLabel = QtWidgets.QLabel(listWidget)
+        IconLabel.setGeometry(QtCore.QRect(11, 10, 360, 270))
+        IconLabel.setGeometry(11, 10, 360, 270)
+        IconLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.pixmap = QPixmap('File1.PNG')
+        IconLabel.setPixmap(self.pixmap) # 이미지 세팅
+        IconLabel.resize(self.pixmap.width(), self.pixmap.height())
+
+        self.playlistGUI.widgetList.append([listWidget, thumbnailLabel, listNameLabel]) # [[1,2,3], [1,2,3], [1,2,3]]
+        listWidget.setParent(self.playlistGUI.verticalFrame)
         
+
 
         
 

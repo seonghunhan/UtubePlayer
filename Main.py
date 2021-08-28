@@ -1,12 +1,21 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
-import StackedLogic
+import PlayVideoPage
+import Playlistpage
+import MainUi
 
 class Main() :
 
     def __init__(self) :
-        self.Stacked = StackedLogic.StackedLogic()
+
+
+ 
+        self.MainUi = MainUi.MainUi()
+        self.Stacked = self.MainUi.stacked
+
+        self.PlayVideoPage = PlayVideoPage.PlayVideoPage(self.Stacked)
+        self.PlaylistPage = Playlistpage.PlayListPage()
 
     
 
