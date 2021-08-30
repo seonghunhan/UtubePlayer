@@ -17,8 +17,8 @@ class DataBase () :
         self.conn.close()
 
 
-    def InputList(self):  # 리스트추가
-        self.cur.execute("INSERT INTO playerdata (Playlist) VALUES('재생목록')")
+    def InputList(self, listName):  # 리스트추가
+        self.cur.execute("INSERT INTO playerdata (Playlist) VALUES('"+ listName+ "')")
 
         self.conn.commit()
 
@@ -29,8 +29,20 @@ class DataBase () :
         
     def calllist(self) :
         self.cur.execute("SELECT * FROM playerdata")
-        self.nowlist = self.cur.fetchall()
+        list = self.cur.fetchall()
+        return list
     
+    def listNameCheck(self, listName): # addplaylogic newListEvent에서 주는 listName변수가 
+        self.cur.execute("SELECT * FROM playerdata WHERE Playlist='" + listName + "'")
+        data = self.cur.fetchall()
+
+        if len(data) == 0:    # listname이 재생목록4라면 재생목록5가될때 select되는게 없으니깐 그떄 True가 반환된다.
+            return True
+        else:
+            return False
+
+    def deleteTest(self) :
+        self.cur.execute("DELETE FROM playerdata WHERE ")
     
         
     # def login(self, id, password):  # 로그인

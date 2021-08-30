@@ -14,7 +14,7 @@ class PlayListUi(object) :
     def __init__(self) :
         self.Window_x = 1700
         self.Window_y = 1300
-        self.playlist_x = 1500   # 플레이목록 프레임사이즈
+        self.playlist_x = 1600   # 플레이목록 프레임사이즈
         self.playlist_y = 800
 
         self.widgetList = []
@@ -24,15 +24,6 @@ class PlayListUi(object) :
 
     def setupUi(self) :
 
-        self.MainWindow = QtWidgets.QMainWindow()
-        self.MainWindow.resize(self.Window_x, self.Window_y)
-        self.MainWindow.setWindowTitle("YouTube Player")
-
-        self.centralwidget = QtWidgets.QWidget(self.MainWindow)
-        self.centralwidget.setGeometry(0, 0, self.Window_x, self.Window_y)
-
-        self.stacked = QtWidgets.QStackedWidget(self.centralwidget)
-        self.stacked.setGeometry(0, 0, self.Window_x, self.Window_y)
 
         self.PlayListPage = QtWidgets.QWidget()
 
@@ -72,9 +63,6 @@ class PlayListUi(object) :
         self.PlayListPage_DeletePlayListBtn.setGeometry(QtCore.QRect(1120, 1040, 161, 41))
         self.PlayListPage_DeletePlayListBtn.setText("재생목록 제거")
 
-        self.stacked.addWidget(self.PlayListPage)
-
-        self.stacked.setCurrentIndex(0)
 
 
 

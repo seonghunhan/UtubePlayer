@@ -6,27 +6,54 @@ import DB
 
 class Addplaylistlogic(object) :
     
-    def __init__(self,StackedUi) :
+    def __init__(self,widgetList,verticalframe,AddplaylistBtn) :
         
-        self.AddplaylistUi = AddplaylistUi.Ui_AddplayUi(StackedUi)
+        # self.AddplaylistUi = AddplaylistUi.Ui_AddplayUi(StackedUi)
 
-        self.StackedUi = StackedUi
+        # self.StackedUi = StackedUi
 
         # self.StackedUi.PlayListPage_AddPlayVideoBtn.clicked.connect(self.playlistshowEvent)
 
         # self.StackedUi.PlayListPage_AddPlayListBtn.mousePressEvent = lambda event : self.addplaylistEvent(event)
-        self.StackedUi.PlayListPage_AddPlayListBtn.clicked.connect(self.addplaylistEvent)
 
-
-
-
-
-    def addplaylistEvent(self) :
+        self.WidgetList = widgetList
+        self.VerticalFrame = verticalframe
+        self.AddplaylistBtn = AddplaylistBtn
+        self.playlist_x = 1600   # 플레이목록 프레임사이즈
+        self.playlist_y = 800
+        self.oneplaylist_x = 400
+        self.oneplaylist_y = 400
         db = DB.DataBase()
-        
-        db.InputList()
+        self.lists = db.calllist()
 
-    def addlist(self) :
+        self.AddplaylistBtn.mousePressEvent = lambda event : self.newListEvent(event)
+
+
+
+
+
+    def newListEvent(self, event):
+        db = DB.DataBase()
+
+        index = 0
+        listName = "재생목록 " + str(index + 1)
+
+        while not db.listNameCheck(listName):  # not False는 True니깐 True가 될때까지 반복하는것(매번 db체크하면서)
+            index += 1
+            listName = "재생목록 " + str(index + 1)  # db에서 False가 반환되면 listname을 계속 1씩 늘려주는것
+
+        db.InputList(listName)
+
+        self.lists.clear()
+        self.lists = db.calllist()
+        
+        idx = len(self.lists) - 1
+        if idx % 4 == 0:
+            self.VerticalFrame.resize(self.playlist_x, self.oneplaylist_y * (idx // 4 + 1))
+
+        self.addlist(idx)
+
+    def addlist(self, idx) :
         
         listWidget = QtWidgets.QWidget()
         listWidget.setStyleSheet("background-color:blue;")
@@ -40,8 +67,28 @@ class Addplaylistlogic(object) :
         IconLabel.setPixmap(self.pixmap) # 이미지 세팅
         IconLabel.resize(self.pixmap.width(), self.pixmap.height())
 
-        self.playlistGUI.widgetList.append([listWidget, thumbnailLabel, listNameLabel]) # [[1,2,3], [1,2,3], [1,2,3]]
-        listWidget.setParent(self.playlistGUI.verticalFrame)
+        listNameLabel = QtWidgets.QLabel(listWidget)
+        listNameLabel.setText("플레이어목록1") # 재생목록 이름 설정
+        listNameLabel.setGeometry(10, 280, 360, 60)
+
+        self.WidgetList.append([listWidget, IconLabel, listNameLabel]) # [[1,2,3], [1,2,3], [1,2,3]]
+        listWidget.setParent(self.VerticalFrame)
+
+        self.location(idx)
+
+        listWidget.show()
+        # idx = len(self.lists) - 1
+        if idx % 4 == 0 :
+            self.VerticalFrame.resize(self.playlist_x - 30, self.playlist_y * (idx // 4 + 1) )
+
+    def location(self, listIdx) :
+
+        for idx in range(listIdx, len(self.WidgetList)) :
+            row = idx // 4
+            column = idx % 4
+
+            self.WidgetList[idx][0].setGeometry(column * self.oneplaylist_x, row * self.oneplaylist_y, 
+                                                self.oneplaylist_x, self.oneplaylist_y)
         
 
 

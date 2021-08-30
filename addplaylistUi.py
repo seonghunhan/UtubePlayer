@@ -3,9 +3,9 @@ from PyQt5.QtGui import QPixmap, QImage
 
 class Ui_AddplayUi(object):
 
-    def __init__(self,StackedUi) :
+    def __init__(self) :
         self.addplaylist = QtWidgets.QMainWindow()
-        self.StackedUi = StackedUi
+
         self.playlistpage1Ui()
         
         # self.addplaylist.show()

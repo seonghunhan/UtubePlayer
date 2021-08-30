@@ -11,11 +11,11 @@ import pafy
 
 class PlayVideoPageUi(object) :
 
-    def __init__(self,Stacked) :
+    def __init__(self) :
         self.Window_x = 1700
         self.Window_y = 1300
+        # self.Stacked = Stacked
 
-        self.Stacked = Stacked
         self.setupUi()
 
 
@@ -37,7 +37,7 @@ class PlayVideoPageUi(object) :
         # self.stacked.setGeometry(0, 0, self.Window_x, self.Window_y)
 
 
-        self.PlayVideoPage = QtWidgets.QWidget(self.Stacked)
+        self.PlayVideoPage = QtWidgets.QWidget()
         self.PlayVideoPage_background1 = QtWidgets.QWidget(self.PlayVideoPage)
         self.PlayVideoPage_background1.setGeometry(QtCore.QRect(1200, 80, 460, 1000))
         self.PlayVideoPage_background1.setStyleSheet("background-color:rgb(188, 188, 188);\n"
