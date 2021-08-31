@@ -13,3 +13,4 @@ class PlayListPage(object) :
         self.verticalFrame = self.PlaylistUi.verticalFrame
         self.AddplaylistBtn = self.PlaylistUi.PlayListPage_AddPlayListBtn
         self.Addplaylistlogic = Addplaylistlogic.Addplaylistlogic(self.widgetList,self.verticalFrame,self.AddplaylistBtn)
+

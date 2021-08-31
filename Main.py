@@ -33,6 +33,7 @@ class Main() :
         self.MainUi.MovePlayListPageBtn.enterEvent = lambda event, animation = ani1 , : self.MovePlayListPagebuttonEnterEvent(event, animation)
         self.MainUi.MovePlayListPageBtn.leaveEvent = lambda event, animation = ani1 , : self.MovePlayListPagebuttonleaveEvent(event, animation)
     
+        self.PlaylistPage.Addplaylistlogic.initList()
 
     def PlayVideoPageMoveEvent(self, event) :
 
@@ -74,22 +75,6 @@ class Main() :
         animation.setEndValue(QtCore.QRect(1390, 30, 151, 51)) # 바뀔값
         animation.setDuration(30)
         animation.start()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,5 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu
 
 import AddplaylistUi
 import DB
@@ -28,7 +29,12 @@ class Addplaylistlogic(object) :
 
         self.AddplaylistBtn.mousePressEvent = lambda event : self.newListEvent(event)
 
-
+        self.menu = QtWidgets.QMenu()
+        self.newListNameAction = QtWidgets.QAction("재생목록 이름 변경", self.menu)
+        self.deleteAction = QtWidgets.QAction("재생목록 삭제", self.menu)
+        self.menu.addAction(self.newListNameAction)
+        self.menu.addAction(self.deleteAction)
+        self.menu.addSeparator()
 
 
 
@@ -87,10 +93,44 @@ class Addplaylistlogic(object) :
             row = idx // 4
             column = idx % 4
 
+            self.WidgetList[idx][0].enterEvent = lambda event, index = idx : self.enterWidgetEvent(event, index)
+            self.WidgetList[idx][0].leaveEvent = lambda event, index = idx : self.leaveWidgetEvent(event, index)
+
             self.WidgetList[idx][0].setGeometry(column * self.oneplaylist_x, row * self.oneplaylist_y, 
                                                 self.oneplaylist_x, self.oneplaylist_y)
         
 
+    def enterWidgetEvent(self, event, index):
+        self.WidgetList[index][0].setStyleSheet("background-color:red;")
+
+    def leaveWidgetEvent(self, event, index):
+        self.WidgetList[index][0].setStyleSheet("background-color:blue;")
+
+    def MenuBarEvent(self) :
+        if QtCore.Qt.RightButton:
+            contextMenu = QMenu(self)
+            DeleteAct = contextMenu.addAction("삭제")
+            RenameAct = contextMenu.addAction("이름변경")
+
+    def initList(self): #리스트 초기화시키는것
+        for widget in self.WidgetList:
+            widget[0].setParent(None)
+
+        self.WidgetList.clear()
+
+        if len(self.lists) % 4 > 0:
+            row = len(self.lists) // 4 + 1
+        else:
+            row = len(self.lists) // 4
+
+        self.VerticalFrame.resize(self.playlist_x, self.oneplaylist_y * row)
+
+        for index in range(0, len(self.lists)):
+            self.addlist(index)
+            
+
+
+    
 
         
 
