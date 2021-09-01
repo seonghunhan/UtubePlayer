@@ -13,12 +13,13 @@ class Ui_AddplayUi(object):
 
     def playlistpage1Ui(self) :
         self.List1 = QtWidgets.QLabel(self.StackedUi.PlayListPage)
-        self.List1.setGeometry(QtCore.QRect(150,200, 200, 200))
+        self.List1.setGeometry(QtCore.QRect(150,200, 500, 500))
         self.List1.setObjectName("List1")
-        self.pixmap = QPixmap('File1.PNG')
-        self.List1.setPixmap(self.pixmap) # 이미지 세팅
-        self.List1.resize(self.pixmap.width(), self.pixmap.height())
-
+        self.List1.setText("가나다")
+        # self.pixmap = QPixmap('File1.PNG')
+        # self.pixmap.scaled(self.List1.width(), self.List1.height())
+        # self.List1.setPixmap(self.pixmap) # 이미지 세팅
+        # self.List1.resize(0,0)
 
 
         self.ListName1 = QtWidgets.QLabel("고고고고", self.StackedUi.PlayListPage)

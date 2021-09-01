@@ -67,14 +67,15 @@ class Addplaylistlogic(object) :
 
         IconLabel = QtWidgets.QLabel(listWidget)
         IconLabel.setGeometry(QtCore.QRect(11, 10, 360, 270))
-        IconLabel.setGeometry(11, 10, 360, 270)
         IconLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.pixmap = QPixmap('File1.PNG')
-        IconLabel.setPixmap(self.pixmap) # 이미지 세팅
-        IconLabel.resize(self.pixmap.width(), self.pixmap.height())
+        size = QtCore.QSize(IconLabel.width(), IconLabel.height())
+        IconLabel.setPixmap(self.pixmap.scaled(size, aspectRatioMode=QtCore.Qt.KeepAspectRatio)) # 최종적으로 label에 pixmap을 넣고 
+        
+  
 
         listNameLabel = QtWidgets.QLabel(listWidget)
-        listNameLabel.setText("플레이어목록1") # 재생목록 이름 설정
+        listNameLabel.setText(self.lists[idx][2]) # 재생목록 이름 설정
         listNameLabel.setGeometry(10, 280, 360, 60)
 
         self.WidgetList.append([listWidget, IconLabel, listNameLabel]) # [[1,2,3], [1,2,3], [1,2,3]]
@@ -83,12 +84,12 @@ class Addplaylistlogic(object) :
         self.location(idx)
 
         listWidget.show()
-        # idx = len(self.lists) - 1
+
         if idx % 4 == 0 :
             self.VerticalFrame.resize(self.playlist_x - 30, self.playlist_y * (idx // 4 + 1) )
 
     def location(self, listIdx) :
-
+# idx = len(self.lists) - 1
         for idx in range(listIdx, len(self.WidgetList)) :
             row = idx // 4
             column = idx % 4
@@ -96,9 +97,28 @@ class Addplaylistlogic(object) :
             self.WidgetList[idx][0].enterEvent = lambda event, index = idx : self.enterWidgetEvent(event, index)
             self.WidgetList[idx][0].leaveEvent = lambda event, index = idx : self.leaveWidgetEvent(event, index)
 
+            for num in range(0, 3):
+                self.WidgetList[idx][num].mousePressEvent = lambda event, listIdx = idx, listName = self.lists[idx][2] : self.listClickEvent(event, listIdx, listName)        
+
             self.WidgetList[idx][0].setGeometry(column * self.oneplaylist_x, row * self.oneplaylist_y, 
                                                 self.oneplaylist_x, self.oneplaylist_y)
         
+
+    def listClickEvent(self, event, listIdx, listName) :
+
+        if event.buttons() & QtCore.Qt.RightButton :
+            self.deleteAction.triggered.connect(lambda hsh, listIdx = listIdx , listName = listIdx, : self.listdeleteEvent(listIdx, listName))
+
+            self.menu.exec_(event.globalPos())
+
+    def listdeleteEvent(self, listIdx, listName) :
+        db = DB.DataBase()
+        db.DeleteList(listName)
+
+
+
+        
+
 
     def enterWidgetEvent(self, event, index):
         self.WidgetList[index][0].setStyleSheet("background-color:red;")
@@ -106,11 +126,6 @@ class Addplaylistlogic(object) :
     def leaveWidgetEvent(self, event, index):
         self.WidgetList[index][0].setStyleSheet("background-color:blue;")
 
-    def MenuBarEvent(self) :
-        if QtCore.Qt.RightButton:
-            contextMenu = QMenu(self)
-            DeleteAct = contextMenu.addAction("삭제")
-            RenameAct = contextMenu.addAction("이름변경")
 
     def initList(self): #리스트 초기화시키는것
         for widget in self.WidgetList:
@@ -128,6 +143,8 @@ class Addplaylistlogic(object) :
         for index in range(0, len(self.lists)):
             self.addlist(index)
             
+    # def listDeleteEvent(self) :
+    #     self.deleteAction.tr
 
 
     

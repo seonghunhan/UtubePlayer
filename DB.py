@@ -12,6 +12,12 @@ class DataBase () :
         # self.cur.execute("CREATE TABLE playerdata (No INTEGER PRIMARY KEY AUTOINCREMENT, URL LONGTEXT, Playlist LONGTEXT) ")
 
         # self.cur.execute("DROP TABLE playerdata") 
+
+        # self.cur.execute("SELECT * FROM playerdata")
+        # list = self.cur.fetchall()
+        # asd = list[0][0]
+        # print(asd)
+
         # self.conn.commit()
         # self.conn.close()
 
@@ -43,13 +49,7 @@ class DataBase () :
         else:
             return False
 
-    def deleteTest(self) :
-        self.cur.execute("DELETE FROM playerdata WHERE ")
-    
-    def earaseList(self, listId):
-        self.cur.execute("DELETE FROM playerdata WHERE listId ='" + str(listId) + "'")
 
-        self.conn.commit()
         
     # def login(self, id, password):  # 로그인
     #     self.cur.execute("SELECT * FROM playerdata WHERE ID = '" +
