@@ -18,6 +18,11 @@ class DataBase () :
         # asd = list[0][0]
         # print(asd)
 
+        # self.cur.execute("DELETE FROM playerdata WHERE Playlist = '재생목록 6' ")
+
+        # self.conn.commit()
+
+
         # self.conn.commit()
         # self.conn.close()
 
@@ -31,7 +36,7 @@ class DataBase () :
         self.conn.commit()
 
     def DeleteList(self, listname) :
-        self.cur.execute("DELETE FROM playerdata WHERE Playlist = '"+ listname + "'")
+        self.cur.execute("DELETE FROM playerdata WHERE Playlist = '"+ listname +"'")
 
         self.conn.commit()
         
@@ -49,8 +54,11 @@ class DataBase () :
         else:
             return False
 
+    def Rename(self,ListName, NewListName) :
+        self.cut.execute("UPDATE playerdate SET Playlist ='"+ NewListName +"' WHERE Playlist = '"+ ListName +"' " )
+        self.conn.commit() 
+        # cur.execute("UPDATE user2 SET id='test' WHERE id='testId' ")
 
-        
     # def login(self, id, password):  # 로그인
     #     self.cur.execute("SELECT * FROM playerdata WHERE ID = '" +
     #                      id + "' and Password = '" + password + "'")

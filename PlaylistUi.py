@@ -14,7 +14,7 @@ class PlayListUi(object) :
     def __init__(self) :
         self.Window_x = 1700
         self.Window_y = 1300
-        self.playlist_x = 1600   # 플레이목록 프레임사이즈
+        self.playlist_x = 1630   # 플레이목록 프레임사이즈
         self.playlist_y = 800
 
         self.widgetList = []
@@ -35,14 +35,14 @@ class PlayListUi(object) :
                                                 "border-width: 1px;\n"
                                                 "border-color: rgb(7, 7, 7)\n"
                                                 "")
-
+# border-color: rgb(7, 7, 7)
         self.scrollArea = QtWidgets.QScrollArea(self.PlayListPage_background)
         self.scrollArea.setGeometry(0, 0, self.playlist_x, self.playlist_y)
 
         self.verticalFrame = QtWidgets.QWidget(self.scrollArea)
-        self.verticalFrame.setGeometry(0, 0, self.playlist_x -30, 10)
+        self.verticalFrame.setGeometry(0, 0, self.playlist_x + 50 , 10)
         self.scrollArea.setWidget(self.verticalFrame)
-        self.verticalFrame.setStyleSheet("border : 1px solid red")
+        # self.verticalFrame.setStyleSheet("border : 1px solid black")
 
         self.PlayListPage_YoutubeLogoBtn = QtWidgets.QPushButton(self.PlayListPage)
         self.PlayListPage_YoutubeLogoBtn.setGeometry(QtCore.QRect(50, 1000, 120, 40))

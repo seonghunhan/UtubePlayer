@@ -4,27 +4,35 @@ from PyQt5.QtGui import QPixmap, QImage
 class Ui_AddplayUi(object):
 
     def __init__(self) :
-        self.addplaylist = QtWidgets.QMainWindow()
 
-        self.playlistpage1Ui()
+
+        self.setup()
         
-        # self.addplaylist.show()
+#       self.MainWindow.show()
 
 
-    def playlistpage1Ui(self) :
-        self.List1 = QtWidgets.QLabel(self.StackedUi.PlayListPage)
-        self.List1.setGeometry(QtCore.QRect(150,200, 500, 500))
-        self.List1.setObjectName("List1")
-        self.List1.setText("가나다")
-        # self.pixmap = QPixmap('File1.PNG')
-        # self.pixmap.scaled(self.List1.width(), self.List1.height())
-        # self.List1.setPixmap(self.pixmap) # 이미지 세팅
-        # self.List1.resize(0,0)
+    def setup(self) :
+        self.AddplaylistUi = QtWidgets.QMainWindow()
+        self.AddplaylistUi.resize(520, 150)
+        self.AddplaylistUi.setWindowTitle("플레이리스트 이름변경")
+
+        self.centralwidget = QtWidgets.QWidget(self.AddplaylistUi)
+        self.centralwidget.setGeometry(0, 0, 520, 150)
+
+        self.ReNameLabel = QtWidgets.QLabel(self.centralwidget)
+        self.ReNameLabel.setGeometry(QtCore.QRect(30, 50, 80, 30))
+        self.ReNameLabel.setText("변경 이름 : ")
 
 
-        self.ListName1 = QtWidgets.QLabel("고고고고", self.StackedUi.PlayListPage)
-        self.ListName1.setGeometry(QtCore.QRect(200,350, 101, 18))
-        self.ListName1.setObjectName("ListName1")
+        self.ReNameText = QtWidgets.QLineEdit(self.centralwidget)
+        self.ReNameText.setGeometry(QtCore.QRect(150, 50, 300, 30))
+
+        self.confirmBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.confirmBtn.setGeometry(QtCore.QRect(350,100,100,30))
+        self.confirmBtn.setText("확인")
+
+
+
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
@@ -34,7 +42,7 @@ class Ui_AddplayUi(object):
 # if __name__ == "__main__":
 #     import sys
 #     app = QtWidgets.QApplication(sys.argv)
-#     start = Ui_Addplaylist()
+#     start = Ui_AddplayUi()
     
 #     sys.exit(app.exec_())
 
