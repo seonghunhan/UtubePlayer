@@ -95,11 +95,11 @@ class PlayVideoPageUi(object) :
         # elif sys.platform == "darwin":  # for MacOS
         #     self.mediaplayer.set_nsobject(self.videoframe.winId())
 
-        self.playurl = QtWidgets.QLineEdit(self.PlayVideoPage)
-        self.playurl.setGeometry(QtCore.QRect(30, 20, 1371, 31))
+        # self.playurl = QtWidgets.QLineEdit(self.PlayVideoPage)
+        # self.playurl.setGeometry(QtCore.QRect(30, 20, 1371, 31))
 
-        self.urlgogobtn = QtWidgets.QPushButton(self.PlayVideoPage)
-        self.urlgogobtn.setGeometry(QtCore.QRect(200, 200, 50, 50))
+        # self.urlgogobtn = QtWidgets.QPushButton(self.PlayVideoPage)
+        # self.urlgogobtn.setGeometry(QtCore.QRect(200, 200, 50, 50))
 
 
 

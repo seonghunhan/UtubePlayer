@@ -3,6 +3,7 @@ from PyQt5.QtGui import QPixmap
 
 import PlaylistUi
 import Addplaylistlogic
+import SearchPage
 
 class PlayListPage(object) :
 
@@ -13,4 +14,6 @@ class PlayListPage(object) :
         self.verticalFrame = self.PlaylistUi.verticalFrame
         self.AddplaylistBtn = self.PlaylistUi.PlayListPage_AddPlayListBtn
         self.Addplaylistlogic = Addplaylistlogic.Addplaylistlogic(self.widgetList,self.verticalFrame,self.AddplaylistBtn)
+        self.SearchBtn = self.PlaylistUi.PlayListPage_SearchBtn
+        self.SearchPage = SearchPage.SearchPage(self.SearchBtn)
 

@@ -51,17 +51,15 @@ class PlayListUi(object) :
         self.PlayListPage_YoutubeLogoBtn.setIcon(icon)
         self.PlayListPage_YoutubeLogoBtn.setIconSize(QtCore.QSize(120, 40))
 
-        self.PlayListPage_AddPlayVideoBtn = QtWidgets.QPushButton(self.PlayListPage)
-        self.PlayListPage_AddPlayVideoBtn.setGeometry(QtCore.QRect(1520, 1040, 161, 41))
-        self.PlayListPage_AddPlayVideoBtn.setText("재생영상 추가")
+        self.PlayListPage_SearchBtn = QtWidgets.QPushButton(self.PlayListPage)
+        self.PlayListPage_SearchBtn.setGeometry(QtCore.QRect(1320, 1040, 161, 41))
+        self.PlayListPage_SearchBtn.setText("검색")
 
         self.PlayListPage_AddPlayListBtn = QtWidgets.QPushButton(self.PlayListPage)
-        self.PlayListPage_AddPlayListBtn.setGeometry(QtCore.QRect(1320, 1040, 161, 41))
-        self.PlayListPage_AddPlayListBtn.setText("재생목록 추가")
+        self.PlayListPage_AddPlayListBtn.setGeometry(QtCore.QRect(1500, 1040, 161, 41))
+        self.PlayListPage_AddPlayListBtn.setText("리스트 추가")
 
-        self.PlayListPage_DeletePlayListBtn = QtWidgets.QPushButton(self.PlayListPage)
-        self.PlayListPage_DeletePlayListBtn.setGeometry(QtCore.QRect(1120, 1040, 161, 41))
-        self.PlayListPage_DeletePlayListBtn.setText("재생목록 제거")
+
 
 
 

@@ -11,6 +11,7 @@ class Addplaylistlogic(object) :
         
         self.AddplaylistUi = AddplaylistUi.Ui_AddplayUi()
 
+
         # self.StackedUi = StackedUi
 
         # self.StackedUi.PlayListPage_AddPlayVideoBtn.clicked.connect(self.playlistshowEvent)
@@ -36,7 +37,7 @@ class Addplaylistlogic(object) :
         self.menu.addAction(self.deleteAction)
         self.menu.addSeparator()
 
-        self.AddplaylistUi.confirmBtn.clicked(self.listReNameEvent2)
+        self.AddplaylistUi.confirmBtn.clicked.connect(self.listReNameEvent2)
 
     def newListEvent(self, event):
         db = DB.DataBase()
@@ -75,13 +76,13 @@ class Addplaylistlogic(object) :
         
   
 
-        listNameLabel = QtWidgets.QLabel(listWidget)
-        listNameLabel.setText(self.lists[idx][2]) # 재생목록 이름 설정
-        listNameLabel.setGeometry(135,120, 150, 60)
-        listNameLabel.setStyleSheet("background-color:white; \n"
-                                    "border-color: white \n"
-                                    "")
-        self.WidgetList.append([listWidget, IconLabel, listNameLabel]) # [[1,2,3], [1,2,3], [1,2,3]]
+        self.listNameLabel = QtWidgets.QLabel(listWidget)
+        self.listNameLabel.setText(self.lists[idx][2]) # 재생목록 이름 설정
+        self.listNameLabel.setGeometry(135,120, 150, 60)
+        self.listNameLabel.setStyleSheet("background-color:white; \n"
+                                        "border-color: white \n"
+                                        "")
+        self.WidgetList.append([listWidget, IconLabel, self.listNameLabel]) # [[1,2,3], [1,2,3], [1,2,3]]
         listWidget.setParent(self.VerticalFrame)
 
         self.location(idx)
@@ -110,10 +111,13 @@ class Addplaylistlogic(object) :
     def listClickEvent(self, event, listIdx, listName) :
 
         if event.buttons() & QtCore.Qt.RightButton : # 여기서 람다변수를 아무거나준거는 행동에대한 이벤트가아니고 단순 변수만 넘길것이기때문에 암거나 괜찮
+            self.deleteAction.triggered.disconnect()
             self.deleteAction.triggered.connect(lambda hsh, listIdx = listIdx , listName = listName, : self.listdeleteEvent(listIdx, listName))
             # self.newListNameAction.triggered.connect(lambda hsh, listName = listName, : self.listReNameEvent(listName) )
 
             self.listName = listName
+            self.listIdx = listIdx
+            self.newListNameAction.triggered.disconnect()
             self.newListNameAction.triggered.connect(self.listReNameEvent1)
             self.menu.exec_(event.globalPos())
 
@@ -122,6 +126,7 @@ class Addplaylistlogic(object) :
     def listdeleteEvent(self, listIdx, listName) :
         db = DB.DataBase()
         db.DeleteList(listName)
+        db.DeleteurlList(listName)
 
         del self.lists[listIdx]
         self.WidgetList[listIdx][0].setParent(None)
@@ -143,10 +148,22 @@ class Addplaylistlogic(object) :
 
 
     def listReNameEvent2(self) :
-
+        
+ 
         db = DB.DataBase()
         NewListName = self.AddplaylistUi.ReNameText.text()
+        ListName = self.listName
+        listIdx = self.listIdx
         db.Rename(ListName, NewListName)
+
+        self.WidgetList[listIdx][2].setText(NewListName)
+        
+        self.AddplaylistUi.AddplaylistUi.close()
+
+
+     
+
+        
 
 
 

@@ -6,12 +6,29 @@ class DataBase () :
         self.conn = sqlite3.connect('playlist.db')
         self.cur = self.conn.cursor()
 
-        # self.cur.execute("INSERT INTO playerdata (Playlist) VALUES('운동')")
+
         
         
-        # self.cur.execute("CREATE TABLE playerdata (No INTEGER PRIMARY KEY AUTOINCREMENT, URL LONGTEXT, Playlist LONGTEXT) ")
+    
+
+        
+        # self.cur.execute("CREATE TABLE playerdata (No INTEGER PRIMARY KEY, URL LONGTEXT, Playlist LONGTEXT) ")
+        # self.cur.execute("CREATE TABLE urllist (No TEXT, URL LONGTEXT, PlayName LONGTEXT) ")
 
         # self.cur.execute("DROP TABLE playerdata") 
+        # self.cur.execute("DROP TABLE urllist")
+
+        # asd = "ccccc"
+
+        # self.SearchPlaylistNo(asd)
+
+        # b = self.list
+
+        # print(b)
+
+        # self.InputNoIntourllist(str(b))
+
+
 
         # self.cur.execute("SELECT * FROM playerdata")
         # list = self.cur.fetchall()
@@ -23,7 +40,7 @@ class DataBase () :
         # self.conn.commit()
 
 
-        # self.conn.commit()
+        self.conn.commit()
         # self.conn.close()
 
     def __del__(self):
@@ -40,6 +57,12 @@ class DataBase () :
 
         self.conn.commit()
         
+    def DeleteurlList(self, listname) :
+        # self.SearchPlaylistNo(listname)
+
+        self.cur.execute("DELETE FROM urllist WHERE No='"+ self.SearchPlaylistNo(listname) +"' ")
+        self.conn.commit()
+
     def calllist(self) :
         self.cur.execute("SELECT * FROM playerdata")
         list = self.cur.fetchall()
@@ -55,8 +78,33 @@ class DataBase () :
             return False
 
     def Rename(self,ListName, NewListName) :
-        self.cut.execute("UPDATE playerdate SET Playlist ='"+ NewListName +"' WHERE Playlist = '"+ ListName +"' " )
+        self.cur.execute("UPDATE playerdata SET Playlist ='"+ NewListName +"' WHERE Playlist = '"+ ListName +"' " )
         self.conn.commit() 
+
+    def CreatePlaylistDB(self, playlist) :
+
+        self.cur.execute("CREATE TABLE '"+ playlist +"' (No INTEGER PRIMARY KEY AUTOINCREMENT, URL LONGTEXT) ")
+        self.conn.commit() 
+
+    def SearchPlaylistNo(self, playlist) :
+        self.cur.execute("SELECT No FROM playerdata WHERE Playlist = '"+ playlist +"'")
+        self.list = self.cur.fetchall()
+
+
+    def Inputurllist(self, playlist, url, title) :
+
+        # self.cur.execute("INSERT INTO urllist VALUSES(?)" , (playlist))
+
+        # self.cur.execute("INSERT INTO urllist VALUES ('"+ playlist +"') " )
+
+
+        self.cur.execute("INSERT INTO urllist (No,URL,PlayName) VALUES('"+ playlist+ "','"+ url +"','"+ title +"')")
+
+        self.conn.commit()
+        
+        
+        
+        
         # cur.execute("UPDATE user2 SET id='test' WHERE id='testId' ")
 
     # def login(self, id, password):  # 로그인

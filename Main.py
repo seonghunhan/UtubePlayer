@@ -5,6 +5,7 @@ import PlayVideoPage
 import Playlistpage
 import MainUi
 
+
 class Main() :
 
     def __init__(self) :
@@ -15,6 +16,7 @@ class Main() :
         self.MainWindow = self.MainUi.MainWindow
 
         # self.Stacked = self.MainUi.stacked
+
 
         self.PlaylistPage = Playlistpage.PlayListPage()
 
@@ -41,16 +43,21 @@ class Main() :
             self.PlayVideoPage = PlayVideoPage.PlayVideoPage(self.MainWindow)
             #여기서 객체선언해야 처음부터 실행되지않음(메모리효율관련)
             self.MainUi.stacked.addWidget(self.PlayVideoPage.PlayVideoPageUi.PlayVideoPage)
-            self.VideoPageIndex = self.MainUi.stacked.indexOf(self.PlayVideoPage.PlayVideoPageUi.PlayVideoPage)
+#            self.VideoPageIndex = self.MainUi.stacked.indexOf(self.PlayVideoPage.PlayVideoPageUi.PlayVideoPage)
             self.MainUi.stacked.setCurrentWidget(self.PlayVideoPage.PlayVideoPageUi.PlayVideoPage)
+            self.MainUi.stacked.removeWidget(self.PlaylistPage.PlaylistUi.PlayListPage)
+            print(self.MainUi.stacked.count()) # 실제로 위젯이 1개만 실행되는지 확인
+
 
     def PlaylistPageMoveEvent(self, event) :
 
 #        index = self.MainUi.stacked.indexOf(sklfn;ksfkl)
 
-        if event.buttons() & QtCore.Qt.LeftButton and self.MainUi.stacked.count() == 2 : # &은 비트연산자비교 ex) 0001 = 0001인지 비교
+        if event.buttons() & QtCore.Qt.LeftButton : # and self.MainUi.stacked.count() == 2 : # &은 비트연산자비교 ex) 0001 = 0001인지 비교
+            self.MainUi.stacked.addWidget(self.PlaylistPage.PlaylistUi.PlayListPage)
             self.MainUi.stacked.setCurrentWidget(self.PlaylistPage.PlaylistUi.PlayListPage)
             self.MainUi.stacked.removeWidget(self.PlayVideoPage.PlayVideoPageUi.PlayVideoPage)
+            print(self.MainUi.stacked.count())
 
     def MovePlayPagebuttonEnterEvent(self, event, animation) :
         animation.setStartValue(QtCore.QRect(1560, 30, 141, 51)) #원래값

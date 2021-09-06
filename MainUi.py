@@ -20,7 +20,7 @@ class MainUi(object) :
         # self.Stacked_x = 1700
         # self.Stacked_y = 1100
 
-        self.widgetList = []
+
 
 
         self.MainUi = QtWidgets.QMainWindow()

@@ -8,7 +8,7 @@ class Test() :
 
     def __init__(self) :
 
-        # self.url = "https://youtu.be/qwqweqe"
+        # self.url = "https://youtu.be/muQcFK4wngg"
 
         # self.instance = vlc.Instance()
         # self.mediaplayer = self.instance.media_player_new()

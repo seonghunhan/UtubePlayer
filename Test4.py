@@ -1,31 +1,47 @@
-from PyQt5.QtWidgets import *
-    
-class TableWidget(QTableWidget):
-    def __init__(self, parent=None):
-        QTableWidget.__init__(self, parent)
-        self.setColumnCount(3)
-        self.setRowCount(3)
-    
-    def contextMenuEvent(self, event):
-        """
-        ContextMenuPolicy --> DefaultContextMenu
-        """
-        print(event.pos())
-        print(self.mapToGlobal(event.pos()))
-        menu = QMenu(self)
-        copy_action = menu.addAction("복사하기")
-        quit_action = menu.addAction("Quit")
-        action = menu.exec_(self.mapToGlobal(event.pos()))
-        if action == quit_action:
-            qApp.quit()
-        elif action == copy_action:
-            print("copy...")
-
-if __name__ == "__main__":
-    import sys
-    app = QApplication([])
-    tableWidget = TableWidget()
-    tableWidget.show()
-    sys.exit(app.exec_())
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+# from oauth2client.tools import argparser
 
 
+DEVELOPER_KEY = "AIzaSyCvq5k8yE26NlsZaA23MDMSUleJs97Flds"
+YOUTUBE_API_SERVICE_NAME="youtube"
+YOUTUBE_API_VERSION="v3"
+youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
+
+search_response = youtube.search().list(
+    q = "살인마협회장", # 검색어
+    order = "relevance",  #정렬방법
+    part = "snippet", # 필수 매개변수
+    maxResults = 10
+    ).execute()
+
+
+
+# for i in search_response['items']:
+
+# print(search_response['items'][0]['id']['videoId'])
+# print(search_response['items'][0]['id']['videoID'])
+# print("###############################3")
+print(search_response['items'][0]['id']['kind'])
+
+
+
+# channel_id = search_response['items'][0]['id']['channelid']
+
+# playlists = youtube.playlist().list(
+#     channeld = channel_id,
+#     part = "snippet",
+#     maxResults = 20
+# ).execute()
+
+# import pandas as pd
+
+# ids=[]
+# titles=[]
+
+# for i in playlists['items'] :
+#     ids.append(i['id'])
+#     titles.append(i['snippet']['title'])
+
+# df = pd.DataFrame([ids,titles]).T
+# df.columns=['PlayLists','Titles']

@@ -6,7 +6,7 @@ class Popup_Window(object):
 
     def __init__(self):
         self.setup()
-        self.Popup_Window.show()
+        # self.Popup_Window.show()
 
 
     def setup(self):
