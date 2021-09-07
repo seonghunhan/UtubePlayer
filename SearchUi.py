@@ -1,14 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap, QImage   
 
-class Ui_SearchUi(object):
+class Ui_SearchUi(object): # 검색창 UI
 
     def __init__(self) :
 
-
         self.setup()
-        
-        # self.SearchUi.show()
 
 
     def setup(self) :
@@ -27,20 +24,15 @@ class Ui_SearchUi(object):
         self.SearchLabel.setGeometry(QtCore.QRect(20, 140, 80, 30))
         self.SearchLabel.setText("검색명  : ")
 
-
         self.PlaylistText = QtWidgets.QLineEdit(self.centralwidget)
         self.PlaylistText.setGeometry(QtCore.QRect(150, 60, 330, 30))
 
         self.SearchText = QtWidgets.QLineEdit(self.centralwidget)
         self.SearchText.setGeometry(QtCore.QRect(150, 140, 330, 30))
 
-
-
         self.AddBtn = QtWidgets.QPushButton(self.centralwidget)
         self.AddBtn.setGeometry(QtCore.QRect(380,220,100,30))
         self.AddBtn.setText("추가")
-
-
 
 
     def retranslateUi(self):

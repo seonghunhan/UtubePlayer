@@ -9,7 +9,7 @@ YOUTUBE_API_VERSION="v3"
 youtube = build(YOUTUBE_API_SERVICE_NAME,YOUTUBE_API_VERSION,developerKey=DEVELOPER_KEY)
 
 search_response = youtube.search().list(
-    q = "살인마협회장", # 검색어
+    q = "뽀로로", # 검색어
     order = "relevance",  #정렬방법
     part = "snippet", # 필수 매개변수
     maxResults = 10
@@ -22,10 +22,12 @@ search_response = youtube.search().list(
 # print(search_response['items'][0]['id']['videoId'])
 # print(search_response['items'][0]['id']['videoID'])
 # print("###############################3")
-print(search_response['items'][0]['id']['kind'])
+# print(search_response['items'][0]['id']['kind'])
+# print("###########################3")
+# print(search_response['items'][0]['snippet']['thumbnails']['default']['url'])
 
 
-
+# 살인마협회장
 # channel_id = search_response['items'][0]['id']['channelid']
 
 # playlists = youtube.playlist().list(

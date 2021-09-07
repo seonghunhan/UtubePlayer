@@ -5,18 +5,13 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu
 import AddplaylistUi
 import DB
 
-class Addplaylistlogic(object) :
+class Addplaylistlogic(object) : # 플레이리스트 추가
     
     def __init__(self,widgetList,verticalframe,AddplaylistBtn) :
         
         self.AddplaylistUi = AddplaylistUi.Ui_AddplayUi()
 
-
-        # self.StackedUi = StackedUi
-
-        # self.StackedUi.PlayListPage_AddPlayVideoBtn.clicked.connect(self.playlistshowEvent)
-
-        # self.StackedUi.PlayListPage_AddPlayListBtn.mousePressEvent = lambda event : self.addplaylistEvent(event)
+        self.beclicked_listidx = [0] # playvideopage로 넘길 클릭된 리스트의 idx
 
         self.WidgetList = widgetList
         self.VerticalFrame = verticalframe
@@ -39,9 +34,10 @@ class Addplaylistlogic(object) :
 
         self.AddplaylistUi.confirmBtn.clicked.connect(self.listReNameEvent2)
 
-    def newListEvent(self, event):
-        db = DB.DataBase()
 
+    def newListEvent(self, event): # 새로운페이지의 이름부여 및 이미지 공간확보
+
+        db = DB.DataBase()
         index = 0
         listName = "재생목록 " + str(index + 1)
 
@@ -50,7 +46,6 @@ class Addplaylistlogic(object) :
             listName = "재생목록 " + str(index + 1)  # db에서 False가 반환되면 listname을 계속 1씩 늘려주는것
 
         db.InputList(listName)
-
         self.lists.clear()
         self.lists = db.calllist()
         
@@ -60,13 +55,12 @@ class Addplaylistlogic(object) :
 
         self.addlist(idx)
 
-    def addlist(self, idx) :
+
+    def addlist(self, idx) : #추가하는 리스트의 정보(라벨,이미지)를 WidgetList에 포함
         
         listWidget = QtWidgets.QWidget()
         # listWidget.setStyleSheet("rgb(188, 188, 188);\n")
-
         
-
         IconLabel = QtWidgets.QLabel(listWidget)
         IconLabel.setGeometry(QtCore.QRect(11, 10, 360, 270))
         IconLabel.setAlignment(QtCore.Qt.AlignCenter)
@@ -74,26 +68,26 @@ class Addplaylistlogic(object) :
         size = QtCore.QSize(IconLabel.width(), IconLabel.height())
         IconLabel.setPixmap(self.pixmap.scaled(size, aspectRatioMode=QtCore.Qt.KeepAspectRatio)) # 최종적으로 label에 pixmap을 넣고 
         
-  
-
         self.listNameLabel = QtWidgets.QLabel(listWidget)
         self.listNameLabel.setText(self.lists[idx][2]) # 재생목록 이름 설정
         self.listNameLabel.setGeometry(135,120, 150, 60)
         self.listNameLabel.setStyleSheet("background-color:white; \n"
                                         "border-color: white \n"
                                         "")
+
         self.WidgetList.append([listWidget, IconLabel, self.listNameLabel]) # [[1,2,3], [1,2,3], [1,2,3]]
         listWidget.setParent(self.VerticalFrame)
 
-        self.location(idx)
-
+        self.location(idx) # idx = len(self.lists) - 1
         listWidget.show()
 
         if idx % 4 == 0 :
             self.VerticalFrame.resize(self.playlist_x , self.playlist_y * (idx // 4 + 1) )
             self.VerticalFrame.setStyleSheet("border-color : rgb(188, 188, 188) ")
-    def location(self, listIdx) :
-# idx = len(self.lists) - 1
+
+
+    def location(self, listIdx) : # 플레이리스트의 자리 재배치
+
         for idx in range(listIdx, len(self.WidgetList)) :
             row = idx // 4
             column = idx % 4
@@ -102,28 +96,42 @@ class Addplaylistlogic(object) :
             self.WidgetList[idx][0].leaveEvent = lambda event, index = idx : self.leaveWidgetEvent(event, index)
 
             for num in range(0, 3):
-                self.WidgetList[idx][num].mousePressEvent = lambda event, listIdx = idx, listName = self.lists[idx][2] : self.listClickEvent(event, listIdx, listName)        
-                # 여기서 람다 이벤트를쓴것은 프레스이벤트에대한 내용중 어떤 이벤트를 실행했는지 알려주기위해 event변수사용 
+                self.WidgetList[idx][num].mousePressEvent = lambda event, listIdx = idx, listName = self.lists[idx][2] : self.listClickEvent(event, listIdx, listName)
+                        
+                # 여기서 람다 이벤트를쓴것은 프레스이벤트에대한 내용중 어떤 이벤트를 실행했는지 알려주기위해 event변수사용
+                # self.WidgetList[idx][num].mousePressEvent = lambda event, listIdx = idx, listName = self.lists[idx][2] : self.GotoPlayPage(event, listIdx, listName) 
+                 
             self.WidgetList[idx][0].setGeometry(column * self.oneplaylist_x, row * self.oneplaylist_y, 
                                                 self.oneplaylist_x, self.oneplaylist_y)
         
 
-    def listClickEvent(self, event, listIdx, listName) :
+    def listClickEvent(self, event, listIdx, listName) : # 리스트 우클릭시 메뉴창등장 함수
 
         if event.buttons() & QtCore.Qt.RightButton : # 여기서 람다변수를 아무거나준거는 행동에대한 이벤트가아니고 단순 변수만 넘길것이기때문에 암거나 괜찮
             self.deleteAction.triggered.disconnect()
-            self.deleteAction.triggered.connect(lambda hsh, listIdx = listIdx , listName = listName, : self.listdeleteEvent(listIdx, listName))
-            # self.newListNameAction.triggered.connect(lambda hsh, listName = listName, : self.listReNameEvent(listName) )
+            self.deleteAction.triggered.connect(lambda hsh, listIdx = listIdx , listName = listName, : self.listdeleteEvent(listIdx, listName))           
 
             self.listName = listName
             self.listIdx = listIdx
+           
             self.newListNameAction.triggered.disconnect()
             self.newListNameAction.triggered.connect(self.listReNameEvent1)
             self.menu.exec_(event.globalPos())
 
+        if event.buttons() & QtCore.Qt.LeftButton :
+            self.GotoPlayPage(listIdx)
     
 
-    def listdeleteEvent(self, listIdx, listName) :
+    def GotoPlayPage(self, listIdx) : # 클릭한 리스트의 인덱스를 영상재생페이지로 넘기는 함수
+
+        videolistidx = int(listIdx) + int(1)
+        
+        # self.beclickedlistidx = videolistidx
+        self.beclicked_listidx.append(videolistidx)
+        print(videolistidx)
+
+
+    def listdeleteEvent(self, listIdx, listName) : # 플레이 리스트 제거 함수
         db = DB.DataBase()
         db.DeleteList(listName)
         db.DeleteurlList(listName)
@@ -131,8 +139,6 @@ class Addplaylistlogic(object) :
         del self.lists[listIdx]
         self.WidgetList[listIdx][0].setParent(None)
         del self.WidgetList[listIdx]
-
-
 
         if listIdx < len(self.WidgetList):
             self.location(listIdx)
@@ -143,12 +149,11 @@ class Addplaylistlogic(object) :
             self.VerticalFrame.resize(self.playlist_x , self.oneplaylist_y * row)
 
 
-    def listReNameEvent1(self) :
+    def listReNameEvent1(self) : # 리스트 이름 재설정 Ui Show 이벤트
         self.AddplaylistUi.AddplaylistUi.show()
 
 
-    def listReNameEvent2(self) :
-        
+    def listReNameEvent2(self) : # 리스트 이름 DB 재설정        
  
         db = DB.DataBase()
         NewListName = self.AddplaylistUi.ReNameText.text()
@@ -161,22 +166,14 @@ class Addplaylistlogic(object) :
         self.AddplaylistUi.AddplaylistUi.close()
 
 
-     
-
-        
-
-
-
-
-
-    def enterWidgetEvent(self, event, index):
+    def enterWidgetEvent(self, event, index): # Widgetlist 애니메이션 이벤트
         self.WidgetList[index][0].setStyleSheet("background-color:black;")
 
     def leaveWidgetEvent(self, event, index):
         self.WidgetList[index][0].setStyleSheet("rgb(188, 188, 188);")
 
 
-    def initList(self): #리스트 초기화시키는것
+    def initList(self): #리스트 초기화함수
         for widget in self.WidgetList:
             widget[0].setParent(None)
 

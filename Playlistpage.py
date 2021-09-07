@@ -5,7 +5,7 @@ import PlaylistUi
 import Addplaylistlogic
 import SearchPage
 
-class PlayListPage(object) :
+class PlayListPage(object) : # 플레이리스트페이지
 
     def __init__(self) :
 
@@ -16,4 +16,6 @@ class PlayListPage(object) :
         self.Addplaylistlogic = Addplaylistlogic.Addplaylistlogic(self.widgetList,self.verticalFrame,self.AddplaylistBtn)
         self.SearchBtn = self.PlaylistUi.PlayListPage_SearchBtn
         self.SearchPage = SearchPage.SearchPage(self.SearchBtn)
+
+        self.beclickedlistidx = self.Addplaylistlogic.beclicked_listidx
 

@@ -13,19 +13,10 @@ class MainUi(object) :
 
     def __init__(self) :
         
-
-        # self.Window_x = 1700
-        # self.Window_y = 1300
         self.setupUi()
-        # self.Stacked_x = 1700
-        # self.Stacked_y = 1100
-
-
-
-
         self.MainUi = QtWidgets.QMainWindow()
-
         self.MainWindow.show()
+
 
     def setupUi(self) :
 
@@ -36,13 +27,8 @@ class MainUi(object) :
         self.centralwidget = QtWidgets.QWidget(self.MainWindow)
         self.centralwidget.setGeometry(0, 0, 1700, 1300)
 
-
         self.stacked = QtWidgets.QStackedWidget(self.centralwidget)
         self.stacked.setGeometry(0, 100, 1700, 1100)
-
-        # self.MoveSearchPageBtn = QtWidgets.QPushButton(self.centralwidget)
-        # self.MoveSearchPageBtn.setGeometry(QtCore.QRect(1420, 30, 121, 51))
-        # self.MoveSearchPageBtn.setText("검색")
 
         self.MovePlayPageBtn = QtWidgets.QPushButton(self.centralwidget)
         self.MovePlayPageBtn.setGeometry(QtCore.QRect(1560, 30, 141, 51))

@@ -5,7 +5,7 @@ class Ui_Deleteplaylist(object):
     def __init__(self) :
         self.Deleteplaylist = QtWidgets.QMainWindow()
         self.setupUi()
-        # self.Deleteplaylist.show()
+        self.Deleteplaylist.show()
 
 
     def setupUi(self):

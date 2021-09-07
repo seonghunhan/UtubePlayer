@@ -9,37 +9,26 @@ import vlc
 import pafy
 
 
-class PlayVideoPageUi(object) :
+class PlayVideoPageUi(object) : # 영상재생페이지 UI
 
     def __init__(self) :
         self.Window_x = 1700
         self.Window_y = 1300
         # self.Stacked = Stacked
 
+        self.PlayVideopage_list_x = 450
+        self.PlayVideopage_list_y = 1000
+
+        self.widgetList2 = []
+
         self.setupUi()
-
-
-
-
-
 
 
     def setupUi(self) :
 
-        # self.MainWindow = QtWidgets.QMainWindow()
-        # self.MainWindow.resize(self.Window_x, self.Window_y)
-        # self.MainWindow.setWindowTitle("YouTube Player")
-
-        # self.centralwidget = QtWidgets.QWidget(self.MainWindow)
-        # self.centralwidget.setGeometry(0, 0, self.Window_x, self.Window_y)
-
-        # self.stacked = QtWidgets.QStackedWidget(self.centralwidget)
-        # self.stacked.setGeometry(0, 0, self.Window_x, self.Window_y)
-
-
         self.PlayVideoPage = QtWidgets.QWidget()
         self.PlayVideoPage_background1 = QtWidgets.QWidget(self.PlayVideoPage)
-        self.PlayVideoPage_background1.setGeometry(QtCore.QRect(1200, 80, 460, 1000))
+        self.PlayVideoPage_background1.setGeometry(QtCore.QRect(10,200,1050,800))
         self.PlayVideoPage_background1.setStyleSheet("background-color:rgb(188, 188, 188);\n"
                                                     "border-radius: 10px ;\n"
                                                     "border-style: solid;\n"
@@ -48,13 +37,21 @@ class PlayVideoPageUi(object) :
                                                     "")
 
         self.PlayVideoPage_background2 = QtWidgets.QWidget(self.PlayVideoPage)
-        self.PlayVideoPage_background2.setGeometry(QtCore.QRect(10, 200, 1060, 800))
+        self.PlayVideoPage_background2.setGeometry(QtCore.QRect(1200, 80, self.PlayVideopage_list_x, self.PlayVideopage_list_y))
         self.PlayVideoPage_background2.setStyleSheet("background-color:rgb(188, 188, 188);\n"
                                                     "border-radius: 10px ;\n"
                                                     "border-style: solid;\n"
                                                     "border-width: 1px;\n"
                                                     "border-color: rgb(7, 7, 7)\n"
                                                     "")
+
+        self.background2_scrollArea = QtWidgets.QScrollArea(self.PlayVideoPage_background2)
+        self.background2_scrollArea.setGeometry(0, 0, self.PlayVideopage_list_x, self.PlayVideopage_list_y)
+
+        self.verticalFrame = QtWidgets.QWidget(self.background2_scrollArea)
+        self.verticalFrame.setGeometry(0, 0, self.PlayVideopage_list_x + 50 , 10)
+        self.background2_scrollArea.setWidget(self.verticalFrame)
+        self.verticalFrame.setStyleSheet("border : 1px solid black")
 
         self.scroll = QtWidgets.QScrollArea(self.PlayVideoPage)
         self.scroll.setGeometry(10 , 100, 1050, 90)
@@ -113,10 +110,10 @@ class PlayVideoPageUi(object) :
 
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    start = PlayVideoPageUi()
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     start = PlayVideoPageUi()
     
-    sys.exit(app.exec_())
+#     sys.exit(app.exec_())
 

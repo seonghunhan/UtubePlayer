@@ -1,15 +1,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap, QImage   
 
-class Ui_AddplayUi(object):
+class Ui_AddplayUi(object): # 리스트추가 UI
 
     def __init__(self) :
 
-
         self.setup()
         
-#       self.MainWindow.show()
-
 
     def setup(self) :
         self.AddplaylistUi = QtWidgets.QMainWindow()
@@ -30,8 +27,6 @@ class Ui_AddplayUi(object):
         self.confirmBtn = QtWidgets.QPushButton(self.centralwidget)
         self.confirmBtn.setGeometry(QtCore.QRect(350,100,100,30))
         self.confirmBtn.setText("확인")
-
-
 
 
     def retranslateUi(self):

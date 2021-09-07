@@ -8,12 +8,12 @@ class DataBase () :
 
 
         
-        
+        # self.call_urllist("1")
     
-
+        # print(self.calllist())
         
         # self.cur.execute("CREATE TABLE playerdata (No INTEGER PRIMARY KEY, URL LONGTEXT, Playlist LONGTEXT) ")
-        # self.cur.execute("CREATE TABLE urllist (No TEXT, URL LONGTEXT, PlayName LONGTEXT) ")
+        # self.cur.execute("CREATE TABLE urllist (No TEXT, URL LONGTEXT, PlayName LONGTEXT, Thumbnails LONGTEXT) ")
 
         # self.cur.execute("DROP TABLE playerdata") 
         # self.cur.execute("DROP TABLE urllist")
@@ -43,32 +43,37 @@ class DataBase () :
         self.conn.commit()
         # self.conn.close()
 
-    def __del__(self):
+    def __del__(self): # 소멸자
         self.conn.close()
 
 
-    def InputList(self, listName):  # 리스트추가
-        self.cur.execute("INSERT INTO playerdata (Playlist) VALUES('"+ listName+ "')")
+    def InputList(self, listName):  # 리스트 추가
 
+        self.cur.execute("INSERT INTO playerdata (Playlist) VALUES('"+ listName+ "')")
         self.conn.commit()
 
-    def DeleteList(self, listname) :
-        self.cur.execute("DELETE FROM playerdata WHERE Playlist = '"+ listname +"'")
 
+    def DeleteList(self, listname) : # 리스트 제거
+
+        self.cur.execute("DELETE FROM playerdata WHERE Playlist = '"+ listname +"'")
         self.conn.commit()
         
-    def DeleteurlList(self, listname) :
+    def DeleteurlList(self, listname) : # 동영상정보테이블 제거
         # self.SearchPlaylistNo(listname)
 
-        self.cur.execute("DELETE FROM urllist WHERE No='"+ self.SearchPlaylistNo(listname) +"' ")
+        self.cur.execute("DELETE FROM urllist WHERE No='"+ str(self.SearchPlaylistNo(listname)) +"' ")
         self.conn.commit()
 
-    def calllist(self) :
+
+    def calllist(self) : # 리스트 부르기
+
         self.cur.execute("SELECT * FROM playerdata")
         list = self.cur.fetchall()
         return list
     
-    def listNameCheck(self, listName): # addplaylogic newListEvent에서 주는 listName변수가 
+
+    def listNameCheck(self, listName): # addplaylogic newListEvent에서 주는 listName변수
+
         self.cur.execute("SELECT * FROM playerdata WHERE Playlist='" + listName + "'")
         data = self.cur.fetchall()
 
@@ -77,32 +82,39 @@ class DataBase () :
         else:
             return False
 
-    def Rename(self,ListName, NewListName) :
+
+    def Rename(self,ListName, NewListName) : # 리스트 이름변경
+
         self.cur.execute("UPDATE playerdata SET Playlist ='"+ NewListName +"' WHERE Playlist = '"+ ListName +"' " )
         self.conn.commit() 
 
-    def CreatePlaylistDB(self, playlist) :
+
+    def CreatePlaylistDB(self, playlist) : # 나중에확인ㄱ
 
         self.cur.execute("CREATE TABLE '"+ playlist +"' (No INTEGER PRIMARY KEY AUTOINCREMENT, URL LONGTEXT) ")
         self.conn.commit() 
 
-    def SearchPlaylistNo(self, playlist) :
+
+    def SearchPlaylistNo(self, playlist) : # 리스트테이블에서 넘버추출
+        
         self.cur.execute("SELECT No FROM playerdata WHERE Playlist = '"+ playlist +"'")
         self.list = self.cur.fetchall()
 
 
-    def Inputurllist(self, playlist, url, title) :
+    def Inputurllist(self, playlist, url, title, thumbnails) : # 동영상정보테이블 입력
 
         # self.cur.execute("INSERT INTO urllist VALUSES(?)" , (playlist))
 
         # self.cur.execute("INSERT INTO urllist VALUES ('"+ playlist +"') " )
-
-
-        self.cur.execute("INSERT INTO urllist (No,URL,PlayName) VALUES('"+ playlist+ "','"+ url +"','"+ title +"')")
-
+        self.cur.execute("INSERT INTO urllist (No,URL,PlayName,Thumbnails) VALUES('"+ playlist+ "','"+ url +"','"+ title +"','"+ thumbnails +"')")
         self.conn.commit()
-        
-        
+
+
+    def call_urllist(self, playlist) : # 썸네일,Title 추출
+
+        self.cur.execute("SELECT Thumbnails,PlayName FROM urllist WHERE No='" + playlist + "'")
+        self.urllist = self.cur.fetchall()
+        # print(self.urllist)
         
         
         # cur.execute("UPDATE user2 SET id='test' WHERE id='testId' ")

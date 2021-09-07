@@ -1,14 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_MinimumMode(object):
+class Ui_MinimumMode(object): # 최소화모드 UI
 
     def __init__(self) :
         self.MinimumUi = QtWidgets.QMainWindow()
         self.setupUi()
 
-        
-    # def MinimumModeUi_show(self) :
-    #     self.MinimumUi.show()
 
     def setupUi(self):
         self.MinimumUi.setObjectName("MainWindow")
@@ -78,6 +75,7 @@ class Ui_MinimumMode(object):
 
         self.retranslateUi(self.MinimumUi)
         QtCore.QMetaObject.connectSlotsByName(self.MinimumUi)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
