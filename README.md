@@ -10,7 +10,7 @@
 - 사용 언어 및 라이브러리 : Python / Pyqt5  
 - DB : SQLite(로컬)  
 
-
+<br>
 
 ## Structure
 ![image](https://user-images.githubusercontent.com/88662101/230555070-e9e48395-ff63-43b7-bf42-4320aff03c8e.png)  
